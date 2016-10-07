@@ -1,14 +1,50 @@
 import React from "react";
 
-import { VictoryArea, VictoryScatter, VictoryGroup, VictoryVoronoiTooltip } from "victory";
+import { VictoryArea } from "victory";
 
 export default (props) => ([
-  <VictoryGroup {...props}>
-    <VictoryArea />
-    <VictoryScatter />
-    <VictoryVoronoiTooltip
-      size={25}
-      labels={(d) => `${d.y}`}
-    />
-  </VictoryGroup>
+  <VictoryArea
+    {...props}
+    style={{
+      data: {
+        fill: props.seriesColor
+      }
+    }}
+    events={[{
+      target: "data",
+      eventHandlers: {
+        onMouseOver: () => {
+          return [
+            {
+              mutation: (props) => {
+                return {
+                  style: {
+                    ...props.style,
+                    opacity: 1
+                  }
+                };
+              }
+            }
+          ];
+        },
+        onMouseOut: () => {
+          return [
+            {
+              mutation: (props) => {
+                return {
+                  style: {
+                    ...props.style,
+                    opacity: 0.75
+                  }
+                };
+              }
+            }
+          ];
+        }
+      }
+    }]}
+    animate={{
+      duration: 100
+    }}
+  />
 ]);

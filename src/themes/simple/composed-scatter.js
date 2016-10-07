@@ -1,7 +1,12 @@
-import React, { PropTypes } from "react";
+import React from "react";
 
 import { VictoryScatter } from "victory";
 
 export default (props) => (
-  <VictoryScatter {...props} />
+  <VictoryScatter
+    animate={{
+      duration: 200
+    }}
+    {...props}
+  />
 );

@@ -1,7 +1,17 @@
-import React, { PropTypes } from "react";
+import React from "react";
 
 import { VictoryBar } from "victory";
 
-export default (props) => (
-  <VictoryBar {...props} />
-);
+export default (props) => ([
+  <VictoryBar
+    style={{
+      data: {
+        fill: props.seriesColor
+      }
+    }}
+    animate={{
+      duration: 200
+    }}
+    {...props}
+  />
+]);

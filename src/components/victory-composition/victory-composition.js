@@ -1,13 +1,27 @@
 import React, { PropTypes } from "react";
-import { VictoryGroup } from "victory";
+import {
+  VictoryAxis,
+  VictoryContainer,
+  VictoryGroup,
+  VictoryLabel,
+  VictoryStack
+} from "victory";
+
 import Themes from "../../themes";
 
 export default class VictoryComposition extends React.Component {
   static displayName = "VictoryComposition";
 
   static propTypes = {
-    domain: PropTypes.oneOf([
+    domain: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.number),
+      PropTypes.shape({
+        x: PropTypes.arrayOf(PropTypes.number),
+        y: PropTypes.arrayOf(PropTypes.number)
+      })
+    ]),
+    domainPadding: PropTypes.oneOfType([
+      PropTypes.number,
       PropTypes.shape({
         x: PropTypes.number,
         y: PropTypes.number
@@ -78,26 +92,30 @@ export default class VictoryComposition extends React.Component {
       accessors: { y: (data) => Math.sin(2 * Math.PI * data.x) },
       type: "line"
     }],
+    subtitle: "My Victory Chart",
+    title: "Victory Chart",
     width: 450
   };
 
-  generateLabels() {
-
-  }
-
-  getRenderableProps(s, index) {
+  getRenderableProps(serie, type, index) {
     const props = {};
     // Key = type + index
-    props.key = `${s.type}-${index}`;
+    props.key = `${type}-${index}`;
 
     // Add accessors if available
-    if (s.accessors) {
-      props.x = s.accessors.x || undefined;
-      props.y = s.accessors.y || undefined;
+    if (serie.accessors) {
+      props.x = serie.accessors.x || undefined;
+      props.y = serie.accessors.y || undefined;
     }
 
     // Add data if available
-    props.data = s.data || undefined;
+    props.data = serie.data || undefined;
+
+    // Get color
+    const { theme } = this.props.theme;
+    const colors = theme.group.colorScale;
+
+    props.seriesColor = colors[index % colors.length];
 
     return props;
   }
@@ -106,29 +124,95 @@ export default class VictoryComposition extends React.Component {
     // Get VictoryChart & theme from theme prop
     const { chart: Chart, theme } = this.props.theme;
     // Pull out relevant props
-    const { height, width, domain } = this.props;
+    const {
+      height,
+      width,
+      domain,
+      domainPadding,
+      title,
+      subtitle
+     } = this.props;
 
     return (
-      <Chart height={height} width={width} domain={domain} theme={theme}>
-        {this.renderSeries()}
+      <Chart
+        containerComponent={
+          <VictoryContainer
+            title={title}
+            desc={subtitle}
+          />
+        }
+        height={height}
+        width={width}
+        domain={domain}
+        domainPadding={domainPadding}
+        theme={theme}
+        padding={{ top: 75, left: 50, bottom: 50, right: 50 }}
+        style={theme.chart.style}
+      >
+        <VictoryLabel
+          x={width / 2}
+          textAnchor="middle"
+          verticalAnchor="start"
+          style={{
+            ...theme.bar.style.labels,
+            fontSize: 18
+          }}
+          text={title}
+        />
+
+        <VictoryLabel
+          x={width / 2}
+          y={32}
+          style={{
+            ...theme.bar.style.labels,
+            fontSize: 12,
+            parent: {
+              paddingBottom: 20
+            }
+          }}
+          text={subtitle}
+          textAnchor="middle"
+          verticalAnchor="start"
+        />
+
+        <VictoryAxis />
+        <VictoryAxis dependentAxis />
+
+        {this.renderSeries(this.props.series)}
+
       </Chart>
     );
   }
 
-  renderSeries() {
+  renderSeries(series) {
     // Create empty elements array
     let elements = [];
 
     // For each series
-    this.props.series.forEach((s, index) => {
+    series.forEach((serie, index) => {
       // Default type to line
-      s.type = s.type || "line";
-      // Get function based upon type
-      const renderComposition = this.props.theme[s.type];
-      // Get reduced prop set to pass to child
-      const targetProps = this.getRenderableProps(s, index);
-      // Concat new elements onto elements array
-      elements = elements.concat(renderComposition(targetProps));
+      const type = serie.type || "line";
+
+      if (serie.type !== "stack" && serie.type !== "group") {
+        // Get function based upon type
+        const renderComposition = this.props.theme[serie.type];
+        // Get reduced prop set to pass to child
+        const targetProps = this.getRenderableProps(serie, type, index);
+        // Concat new elements onto elements array
+        elements = elements.concat(renderComposition(targetProps));
+      } else if (serie.type === "stack") {
+        elements = elements.concat([
+          <VictoryStack key={`stack-${index}`}>
+            {this.renderSeries(serie.data)}
+          </VictoryStack>
+        ]);
+      } else if (serie.type === "group") {
+        elements = elements.concat([
+          <VictoryGroup offset={20} key={`group-${index}`}>
+            {this.renderSeries(serie.data)}
+          </VictoryGroup>
+        ]);
+      }
     });
 
     return elements;
