@@ -1,6 +1,6 @@
 import React from "react";
 
-import { VictoryPie } from "victory";
+import { VictoryPie } from "victory-chart";
 
 export default (props) => (
   <VictoryPie

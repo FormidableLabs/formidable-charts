@@ -1,16 +1,18 @@
 import React, { PropTypes } from "react";
+
 import {
-  VictoryAxis,
-  VictoryContainer,
-  VictoryGroup,
-  VictoryLabel,
   VictoryStack
-} from "victory";
+} from "victory-chart";
+
+import {
+  VictoryLabel,
+  VictoryContainer
+} from "victory-core";
 
 import Themes from "../../themes";
 
-export default class VictoryComposition extends React.Component {
-  static displayName = "VictoryComposition";
+export default class VictoryBarChart extends React.Component {
+  static displayName = "VictoryBarChart";
 
   static propTypes = {
     domain: PropTypes.oneOfType([
@@ -28,7 +30,6 @@ export default class VictoryComposition extends React.Component {
       })
     ]),
     height: PropTypes.number,
-    legend: PropTypes.bool,
     series: PropTypes.arrayOf(
       PropTypes.shape({
         accessors: PropTypes.shape({
@@ -43,8 +44,7 @@ export default class VictoryComposition extends React.Component {
         }),
         data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
         name: PropTypes.string,
-        style: PropTypes.object,
-        type: PropTypes.string
+        style: PropTypes.object
       })
     ),
     subtitle: PropTypes.string,
@@ -56,51 +56,27 @@ export default class VictoryComposition extends React.Component {
       line: PropTypes.func,
       pie: PropTypes.func,
       scatter: PropTypes.func,
-      theme: PropTypes.object,
-      wrapper: PropTypes.func
+      theme: PropTypes.object
     }),
     title: PropTypes.string,
-    tooltip: PropTypes.shape({
-      labelFormat: PropTypes.func,
-      style: PropTypes.object,
-      options: PropTypes.object
-    }),
     width: PropTypes.number,
-    xAxis: PropTypes.shape({
-      labels: PropTypes.arrayOf("string"),
-      labelFormat: PropTypes.oneOf([
-        PropTypes.func,
-        PropTypes.arrayOf(PropTypes.func)
-      ]),
-      title: PropTypes.string
-    }),
-    yAxis: PropTypes.shape({
-      labels: PropTypes.arrayOf("string"),
-      labelFormat: PropTypes.oneOf([
-        PropTypes.func,
-        PropTypes.arrayOf(PropTypes.func)
-      ]),
-      title: PropTypes.string
-    })
+    xAxis: PropTypes.object,
+    yAxis: PropTypes.object
   };
 
   static defaultProps = {
     height: 300,
-    legend: true,
     theme: Themes.simple,
     series: [{
-      accessors: { y: (data) => Math.sin(2 * Math.PI * data.x) },
-      type: "line"
+      accessors: { y: (data) => Math.sin(2 * Math.PI * data.x) }
     }],
-    subtitle: "My Victory Chart",
-    title: "Victory Chart",
     width: 450
   };
 
-  getRenderableProps(serie, type, index) {
+  getRenderableProps(serie, index) {
     const props = {};
     // Key = type + index
-    props.key = `${type}-${index}`;
+    props.key = `bar-${index}`;
 
     // Add accessors if available
     if (serie.accessors) {
@@ -115,6 +91,7 @@ export default class VictoryComposition extends React.Component {
     const { theme } = this.props.theme;
     const colors = theme.group.colorScale;
 
+    props.theme = theme;
     props.seriesColor = colors[index % colors.length];
 
     return props;
@@ -146,8 +123,16 @@ export default class VictoryComposition extends React.Component {
         domain={domain}
         domainPadding={domainPadding}
         theme={theme}
-        padding={{ top: 75, left: 50, bottom: 50, right: 50 }}
-        style={theme.chart.style}
+        padding={{
+          top: this.props.subtitle || this.props.title ? 75 : 25,
+          left: 50,
+          bottom: 50,
+          right: 50
+        }}
+        style={{...theme.chart.style, parent: {
+          ...theme.chart.style.parent,
+          paddingTop: 25
+        }}}
       >
         <VictoryLabel
           x={width / 2}
@@ -175,13 +160,21 @@ export default class VictoryComposition extends React.Component {
           verticalAnchor="start"
         />
 
-        <VictoryAxis />
-        <VictoryAxis dependentAxis />
+        {this.renderAxis("xAxis")}
+        {this.renderAxis("yAxis", {dependentAxis: true})}
 
-        {this.renderSeries(this.props.series)}
+        <VictoryStack>
+          {this.renderSeries(this.props.series)}
+        </VictoryStack>
 
       </Chart>
     );
+  }
+
+  renderAxis(key, options) {
+    const { axis } = this.props.theme;
+    const axisProps = this.props[key];
+    return axis({...options, ...axisProps});
   }
 
   renderSeries(series) {
@@ -190,29 +183,11 @@ export default class VictoryComposition extends React.Component {
 
     // For each series
     series.forEach((serie, index) => {
-      // Default type to line
-      const type = serie.type || "line";
-
-      if (serie.type !== "stack" && serie.type !== "group") {
-        // Get function based upon type
-        const renderComposition = this.props.theme[serie.type];
-        // Get reduced prop set to pass to child
-        const targetProps = this.getRenderableProps(serie, type, index);
-        // Concat new elements onto elements array
-        elements = elements.concat(renderComposition(targetProps));
-      } else if (serie.type === "stack") {
-        elements = elements.concat([
-          <VictoryStack key={`stack-${index}`}>
-            {this.renderSeries(serie.data)}
-          </VictoryStack>
-        ]);
-      } else if (serie.type === "group") {
-        elements = elements.concat([
-          <VictoryGroup offset={20} key={`group-${index}`}>
-            {this.renderSeries(serie.data)}
-          </VictoryGroup>
-        ]);
-      }
+      const renderComposition = this.props.theme.bar;
+      // Get reduced prop set to pass to child
+      const targetProps = this.getRenderableProps(serie, index);
+      // Concat new elements onto elements array
+      elements = elements.concat(renderComposition(targetProps));
     });
 
     return elements;

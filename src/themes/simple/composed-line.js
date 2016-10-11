@@ -1,6 +1,6 @@
 import React from "react";
 
-import { VictoryLine, VictoryScatter, VictoryGroup, VictoryVoronoiTooltip } from "victory";
+import { VictoryLine, VictoryScatter, VictoryGroup, VictoryVoronoiTooltip } from "victory-chart";
 
 export default (props) => ([
   <VictoryGroup {...props}>

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { VictoryBar } from "victory";
+import { VictoryBar } from "victory-chart";
 
 export default (props) => ([
   <VictoryBar

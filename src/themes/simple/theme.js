@@ -122,8 +122,7 @@ export default {
   chart: {
     style: {
       parent: {
-        background: "#222222",
-        paddingTop: 20
+        background: "#222222"
       }
     },
     ...baseProps
@@ -204,12 +203,12 @@ export default {
       flyout: {
         stroke: primary,
         strokeWidth: 1,
-        fill: "#f0f0f0"
+        fill: "#333333"
       }
     },
     flyoutProps: {
-      cornerRadius: 10,
-      pointerLength: 10
+      cornerRadius: 2,
+      pointerLength: 0
     },
     ...baseProps
   },

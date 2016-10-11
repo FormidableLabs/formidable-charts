@@ -1,13 +1,15 @@
 import React from "react";
 
-import { VictoryArea } from "victory";
+import { VictoryArea } from "victory-chart";
 
 export default (props) => ([
   <VictoryArea
     {...props}
     style={{
       data: {
-        fill: props.seriesColor
+        fill: props.seriesColor,
+        strokeWidth: 0,
+        stroke: "transparent"
       }
     }}
     events={[{
@@ -16,10 +18,10 @@ export default (props) => ([
         onMouseOver: () => {
           return [
             {
-              mutation: (props) => {
+              mutation: (lastProps) => {
                 return {
                   style: {
-                    ...props.style,
+                    ...lastProps.style,
                     opacity: 1
                   }
                 };
@@ -30,10 +32,10 @@ export default (props) => ([
         onMouseOut: () => {
           return [
             {
-              mutation: (props) => {
+              mutation: (lastProps) => {
                 return {
                   style: {
-                    ...props.style,
+                    ...lastProps.style,
                     opacity: 0.75
                   }
                 };

@@ -28,7 +28,9 @@
   },
   "dependencies": {
     "builder-victory-component": "^2.5.0",
-    "victory": "^0.12.1"
+    "victory-chart": "^12.0.1",
+    "victory-core": "^8.0.1",
+    "victory-pie": "^6.0.0"
   },
   "devDependencies": {
     "builder-victory-component-dev": "^2.5.0",

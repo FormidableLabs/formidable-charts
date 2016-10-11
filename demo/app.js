@@ -1,7 +1,7 @@
 /*global document:false */
 import React from "react";
 import ReactDOM from "react-dom";
-import VictoryCompositionDemo from "./components/victory-composition-demo";
+import VictoryComposedDemo from "./components/victory-composed-demo";
 
 const content = document.getElementById("content");
 
@@ -13,8 +13,8 @@ const App = React.createClass({
   render() {
     return (
       <div>
-        <h1>Victory Composition Demo</h1>
-        <VictoryCompositionDemo />
+        <h1>Victory Composed Demo</h1>
+        <VictoryComposedDemo />
       </div>
     );
   }
