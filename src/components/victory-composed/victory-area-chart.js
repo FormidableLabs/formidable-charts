@@ -15,6 +15,13 @@ export default class VictoryAreaChart extends React.Component {
   static displayName = "VictoryAreaChart";
 
   static propTypes = {
+    categories: PropTypes.oneOfType([
+      PropTypes.shape({
+        x: PropTypes.arrayOf(PropTypes.string),
+        y: PropTypes.arrayOf(PropTypes.string)
+      }),
+      PropTypes.arrayOf(PropTypes.string)
+    ]),
     domain: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.number),
       PropTypes.shape({
@@ -30,6 +37,11 @@ export default class VictoryAreaChart extends React.Component {
       })
     ]),
     height: PropTypes.number,
+    interpolation: PropTypes.oneOf([
+      "basis", "basisClosed", "basisOpen", "bundle", "cardinal", "cardinalClosed", "cardinalOpen",
+      "catmullRom", "catmullRomClosed", "catmullRomOpen", "linear", "linearClosed", "monotoneX",
+      "monotoneY", "natural", "radial", "step", "stepAfter", "stepBefore"
+    ]),
     series: PropTypes.arrayOf(
       PropTypes.shape({
         accessors: PropTypes.shape({
@@ -47,6 +59,7 @@ export default class VictoryAreaChart extends React.Component {
         style: PropTypes.object
       })
     ),
+    stacked: PropTypes.bool,
     subtitle: PropTypes.string,
     theme: PropTypes.shape({
       area: PropTypes.func,
@@ -84,6 +97,8 @@ export default class VictoryAreaChart extends React.Component {
       props.y = serie.accessors.y || undefined;
     }
 
+    props.interpolation = this.props.interpolation;
+
     // Add data if available
     props.data = serie.data || undefined;
 
@@ -93,6 +108,7 @@ export default class VictoryAreaChart extends React.Component {
 
     props.theme = theme;
     props.seriesColor = colors[index % colors.length];
+    props.style = serie.style;
 
     return props;
   }
@@ -163,9 +179,11 @@ export default class VictoryAreaChart extends React.Component {
         {this.renderAxis("xAxis")}
         {this.renderAxis("yAxis", {dependentAxis: true})}
 
-        <VictoryStack>
-          {this.renderSeries(this.props.series)}
-        </VictoryStack>
+        {this.props.stacked ? (
+          <VictoryStack {...this.props}>
+            {this.renderSeries(this.props.series)}
+          </VictoryStack>
+        ) : this.renderSeries(this.props.series)}
 
       </Chart>
     );

@@ -1,6 +1,7 @@
 import React, { PropTypes } from "react";
 
 import {
+  VictoryGroup,
   VictoryStack
 } from "victory-chart";
 
@@ -15,6 +16,13 @@ export default class VictoryBarChart extends React.Component {
   static displayName = "VictoryBarChart";
 
   static propTypes = {
+    categories: PropTypes.oneOfType([
+      PropTypes.shape({
+        x: PropTypes.arrayOf(PropTypes.string),
+        y: PropTypes.arrayOf(PropTypes.string)
+      }),
+      PropTypes.arrayOf(PropTypes.string)
+    ]),
     domain: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.number),
       PropTypes.shape({
@@ -29,7 +37,12 @@ export default class VictoryBarChart extends React.Component {
         y: PropTypes.number
       })
     ]),
+    labels: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.arrayOf(PropTypes.string)
+    ]),
     height: PropTypes.number,
+    offset: PropTypes.number,
     series: PropTypes.arrayOf(
       PropTypes.shape({
         accessors: PropTypes.shape({
@@ -42,11 +55,16 @@ export default class VictoryBarChart extends React.Component {
             PropTypes.func
           ])
         }),
+        labels: PropTypes.oneOfType([
+          PropTypes.func,
+          PropTypes.arrayOf(PropTypes.string)
+        ]),
         data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
         name: PropTypes.string,
         style: PropTypes.object
       })
     ),
+    stacked: PropTypes.bool,
     subtitle: PropTypes.string,
     theme: PropTypes.shape({
       area: PropTypes.func,
@@ -70,6 +88,7 @@ export default class VictoryBarChart extends React.Component {
     series: [{
       accessors: { y: (data) => Math.sin(2 * Math.PI * data.x) }
     }],
+    offset: 15,
     width: 450
   };
 
@@ -93,6 +112,7 @@ export default class VictoryBarChart extends React.Component {
 
     props.theme = theme;
     props.seriesColor = colors[index % colors.length];
+    props.style = serie.style;
 
     return props;
   }
@@ -163,9 +183,7 @@ export default class VictoryBarChart extends React.Component {
         {this.renderAxis("xAxis")}
         {this.renderAxis("yAxis", {dependentAxis: true})}
 
-        <VictoryStack>
-          {this.renderSeries(this.props.series)}
-        </VictoryStack>
+        {this.renderGroup()}
 
       </Chart>
     );
@@ -175,6 +193,22 @@ export default class VictoryBarChart extends React.Component {
     const { axis } = this.props.theme;
     const axisProps = this.props[key];
     return axis({...options, ...axisProps});
+  }
+
+  renderGroup() {
+    if (this.props.stacked === true) {
+      return (
+        <VictoryStack {...this.props}>
+          {this.renderSeries(this.props.series)}
+        </VictoryStack>
+      );
+    } else {
+      return (
+        <VictoryGroup {...this.props}>
+          {this.renderSeries(this.props.series)}
+        </VictoryGroup>
+      );
+    }
   }
 
   renderSeries(series) {

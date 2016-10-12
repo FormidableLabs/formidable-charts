@@ -5,6 +5,7 @@ import { VictoryLine, VictoryScatter, VictoryGroup, VictoryVoronoiTooltip } from
 export default (props) => ([
   <VictoryGroup {...props}>
     <VictoryLine
+      {...props}
       style={{
         data: {
           stroke: props.seriesColor

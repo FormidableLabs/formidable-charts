@@ -11,6 +11,13 @@ export default class VictoryLineChart extends React.Component {
   static displayName = "VictoryLineChart";
 
   static propTypes = {
+    categories: PropTypes.oneOfType([
+      PropTypes.shape({
+        x: PropTypes.arrayOf(PropTypes.string),
+        y: PropTypes.arrayOf(PropTypes.string)
+      }),
+      PropTypes.arrayOf(PropTypes.string)
+    ]),
     domain: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.number),
       PropTypes.shape({
@@ -26,6 +33,11 @@ export default class VictoryLineChart extends React.Component {
       })
     ]),
     height: PropTypes.number,
+    interpolation: PropTypes.oneOf([
+      "basis", "basisClosed", "basisOpen", "bundle", "cardinal", "cardinalClosed", "cardinalOpen",
+      "catmullRom", "catmullRomClosed", "catmullRomOpen", "linear", "linearClosed", "monotoneX",
+      "monotoneY", "natural", "radial", "step", "stepAfter", "stepBefore"
+    ]),
     series: PropTypes.arrayOf(
       PropTypes.shape({
         accessors: PropTypes.shape({
@@ -79,6 +91,10 @@ export default class VictoryLineChart extends React.Component {
       props.x = serie.accessors.x || undefined;
       props.y = serie.accessors.y || undefined;
     }
+
+    props.categories = this.props.categories;
+    props.interpolation = this.props.interpolation;
+    props.style = serie.style;
 
     // Add data if available
     props.data = serie.data || undefined;

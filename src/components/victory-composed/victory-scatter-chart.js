@@ -11,6 +11,13 @@ export default class VictoryScatterChart extends React.Component {
   static displayName = "VictoryScatterChart";
 
   static propTypes = {
+    categories: PropTypes.oneOfType([
+      PropTypes.shape({
+        x: PropTypes.arrayOf(PropTypes.string),
+        y: PropTypes.arrayOf(PropTypes.string)
+      }),
+      PropTypes.arrayOf(PropTypes.string)
+    ]),
     domain: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.number),
       PropTypes.shape({
@@ -38,12 +45,29 @@ export default class VictoryScatterChart extends React.Component {
             PropTypes.func
           ])
         }),
+        bubbleProperty: PropTypes.string,
         data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+        labels: PropTypes.oneOfType([
+          PropTypes.func,
+          PropTypes.arrayOf(PropTypes.string)
+        ]),
         name: PropTypes.string,
-        style: PropTypes.object
+        style: PropTypes.object,
+        symbol: PropTypes.oneOfType([
+          PropTypes.oneOf([
+            "circle", "diamond", "plus", "square", "star", "triangleDown", "triangleUp"
+          ]),
+          PropTypes.func
+        ])
       })
     ),
     subtitle: PropTypes.string,
+    symbol: PropTypes.oneOfType([
+      PropTypes.oneOf([
+        "circle", "diamond", "plus", "square", "star", "triangleDown", "triangleUp"
+      ]),
+      PropTypes.func
+    ]),
     theme: PropTypes.shape({
       area: PropTypes.func,
       axis: PropTypes.func,
@@ -74,6 +98,10 @@ export default class VictoryScatterChart extends React.Component {
     // Key = type + index
     props.key = `scatter-${index}`;
 
+    props.bubbleProperty = serie.bubbleProperty || undefined;
+    props.categories = this.props.categories;
+    props.symbol = serie.symbol || this.props.symbol || undefined;
+
     // Add accessors if available
     if (serie.accessors) {
       props.x = serie.accessors.x || undefined;
@@ -89,6 +117,7 @@ export default class VictoryScatterChart extends React.Component {
 
     props.theme = theme;
     props.seriesColor = colors[index % colors.length];
+    props.style = serie.style;
 
     return props;
   }
