@@ -192,6 +192,7 @@ export default {
     ...baseProps
   },
   tooltip: {
+    padding: 10,
     style: {
       data: {
         fill: "transparent",
@@ -208,8 +209,7 @@ export default {
     flyoutProps: {
       cornerRadius: 2,
       pointerLength: 0
-    },
-    ...baseProps
+    }
   },
   voronoi: {
     style: {

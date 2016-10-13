@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 
 import {
@@ -10,260 +11,152 @@ import {
   Themes
 } from "../../src";
 
+function random(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+const types = ["line", "area", "scatter"];
+
+const ComponentDemos = {
+  composedStandalone: (props) => (
+    <VictoryStandalone
+      title="VictoryStandalone"
+      subtitle="Composed Demo"
+      theme={Themes[props.theme]}
+      series={props.data.map(data => {
+        const type = random(0,2);
+        return {
+          type: types[type],
+          data: data.data
+        };
+      })}
+    />
+  ),
+  lineChart: (props) => (
+    <VictoryLineChart
+      title="VictoryLineChart"
+      theme={Themes[props.theme]}
+      series={props.data}
+    />
+  ),
+  areaChart: (props) => (
+    <VictoryAreaChart
+      interpolation="natural"
+      stacked
+      title="VictoryAreaChart"
+      theme={Themes[props.theme]}
+      series={props.data}
+    />
+  ),
+  barChart: (props) => (
+    <VictoryBarChart
+      title="VictoryBarChart"
+      theme={Themes[props.theme]}
+      series={props.data}
+    />
+  ),
+  scatterChart: (props) => (
+    <VictoryScatterChart
+      title="VictoryScatterChart"
+      theme={Themes[props.theme]}
+      series={props.data}
+      symbol="star"
+    />
+  ),
+  pieChart: (props) => (
+    <VictoryPieChart
+      title="VictoryPieChart"
+      innerRadius={100}
+      theme={Themes[props.theme]}
+      data={props.data[0].data}
+    />
+  )
+};
+
 export default class Wrapper extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      theme: "bright"
+      theme: "bright",
+      component: "areaChart",
+      data: this.generateNewData()
     };
 
-    this.handleSelectChange = this.handleSelectChange.bind(this);
+    this.handleNewData = this.handleNewData.bind(this);
+    this.handleThemeChange = this.handleThemeChange.bind(this);
+    this.handleComponentChange = this.handleComponentChange.bind(this);
   }
-  handleSelectChange(e) {
+  generateNewData() {
+    const seriesCount = random(2,5);
+    const pointCount = random(3,6);
+
+    let series = [];
+
+    for(let a = 0; a < seriesCount; a++) {
+      let data = [];
+      for(let b = 0; b < pointCount; b++) {
+        data = data.concat({ x: b + 5, y: random(1, 10)})
+      }
+      series = series.concat({ data: data });
+    }
+
+    return series;
+  }
+  handleNewData() {
+    this.setState({
+      data: this.generateNewData()
+    });
+  }
+  handleThemeChange(e) {
     this.setState({
       theme: e.target.value
     });
   }
+  handleComponentChange(e) {
+    this.setState({
+      component: e.target.value
+    });
+  }
   render() {
+    const ComponentPreview = ComponentDemos[this.state.component];
     return (
       <div>
+        <label>
+        Theme:
         <select
           style={{
-            display: "block",
+            display: "inline-block",
             margin: "1%"
           }}
-          onChange={this.handleSelectChange}
+          onChange={this.handleThemeChange}
         >
           <option value="bright" defaultValue>Bright</option>
           <option value="simple">Simple</option>
           <option value="dark">Dark</option>
           <option value="danceparty">Dance Party</option>
         </select>
-        <div style={{width: "450px", display: "inline-block", margin: "1%"}}>
-          <VictoryStandalone
-            title="VictoryStandalone"
-            subtitle="Line Demo"
-            theme={Themes[this.state.theme]}
-            series={[
-              {
-                type: "line",
-                data: [{x: 0, y: 5}, {x: 1, y: 2}, {x: 2, y: 12}, {x: 3, y: 1}]
-              },
-              {
-                type: "line",
-                data: [{x: 0, y: 2}, {x: 1, y: 1}, {x: 2, y: 7}, {x: 3, y: 12}]
-              },
-              {
-                type: "line",
-                data: [{x: 0, y: 15}, {x: 1, y: 6}, {x: 2, y: 2}, {x: 3, y: 6}]
-              },
-              {
-                type: "line",
-                data: [{x: 0, y: 3}, {x: 1, y: 12}, {x: 2, y: 3}, {x: 3, y: 5}]
-              },
-              {
-                type: "line",
-                data: [{x: 0, y: 11}, {x: 1, y: 15}, {x: 2, y: 19}, {x: 3, y: 5}]
-              }
-            ]}
-          />
-        </div>
-        <div style={{width: "450px", display: "inline-block", margin: "1%"}}>
-          <VictoryStandalone
-            title="VictoryStandalone"
-            subtitle="Area Demo"
-            theme={Themes[this.state.theme]}
-            series={[
-              {
-                type: "stack",
-                data: [
-                  {
-                    type: "area",
-                    data: [{x: 0, y: 5}, {x: 1, y: 2}, {x: 2, y: 12}, {x: 3, y: 1}]
-                  },
-                  {
-                    type: "area",
-                    data: [{x: 0, y: 2}, {x: 1, y: 1}, {x: 2, y: 7}, {x: 3, y: 12}]
-                  },
-                  {
-                    type: "area",
-                    data: [{x: 0, y: 15}, {x: 1, y: 6}, {x: 2, y: 2}, {x: 3, y: 6}]
-                  },
-                  {
-                    type: "area",
-                    data: [{x: 0, y: 5}, {x: 1, y: 16}, {x: 2, y: 22}, {x: 3, y: 6}]
-                  }
-                ]
-              }
-            ]}
-          />
-        </div>
-        <div style={{width: "450px", display: "inline-block", margin: "1%"}}>
-          <VictoryStandalone
-            title="VictoryStandalone"
-            subtitle="Bar Demo"
-            theme={Themes[this.state.theme]}
-            series={[
-              {
-                type: "group",
-                data: [
-                  {
-                    type: "bar",
-                    data: [{x: 1, y: 5}, {x: 2, y: 2}, {x: 3, y: 12}, {x: 4, y: 1}]
-                  },
-                  {
-                    type: "bar",
-                    data: [{x: 1, y: 2}, {x: 2, y: 1}, {x: 3, y: 7}, {x: 4, y: 12}]
-                  },
-                  {
-                    type: "bar",
-                    data: [{x: 1, y: 15}, {x: 2, y: 6}, {x: 3, y: 2}, {x: 4, y: 6}]
-                  },
-                  {
-                    type: "bar",
-                    data: [{x: 1, y: 5}, {x: 2, y: 16}, {x: 3, y: 22}, {x: 4, y: 6}]
-                  }
-                ]
-              }
-            ]}
-          />
-        </div>
-        <div style={{width: "450px", display: "inline-block", margin: "1%"}}>
-          <VictoryStandalone
-            title="VictoryStandalone"
-            subtitle="Scatter Demo"
-            theme={Themes[this.state.theme]}
-            xAxis={{
-              tickValues: ["test", "test2", "test3", "test4", "test5"]
-            }}
-            series={[
-              {
-                type: "scatter",
-                data: [{x: 0, y: 5}, {x: 1, y: 2}, {x: 2, y: 12}, {x: 3, y: 1}]
-              },
-              {
-                type: "scatter",
-                data: [{x: 0, y: 2}, {x: 1, y: 1}, {x: 2, y: 7}, {x: 3, y: 12}]
-              },
-              {
-                type: "scatter",
-                data: [{x: 0, y: 15}, {x: 1, y: 6}, {x: 2, y: 2}, {x: 3, y: 6}]
-              }
-            ]}
-          />
-        </div>
-        <div style={{width: "450px", display: "inline-block", margin: "1%"}}>
-          <VictoryLineChart
-            interpolation="cardinal"
-            title="VictoryLineChart"
-            theme={Themes[this.state.theme]}
-            series={[
-              {
-                data: [{x: 0, y: 5}, {x: 1, y: 2}, {x: 2, y: 12}, {x: 3, y: 1}]
-              },
-              {
-                data: [{x: 0, y: 2}, {x: 1, y: 1}, {x: 2, y: 7}, {x: 3, y: 12}]
-              },
-              {
-                data: [{x: 0, y: 15}, {x: 1, y: 6}, {x: 2, y: 2}, {x: 3, y: 6}]
-              },
-              {
-                data: [{x: 0, y: 3}, {x: 1, y: 12}, {x: 2, y: 3}, {x: 3, y: 5}]
-              },
-              {
-                data: [{x: 0, y: 11}, {x: 1, y: 15}, {x: 2, y: 19}, {x: 3, y: 5}]
-              }
-            ]}
-          />
-        </div>
-        <div style={{width: "450px", display: "inline-block", margin: "1%"}}>
-          <VictoryAreaChart
-            interpolation="natural"
-            stacked
-            title="VictoryAreaChart"
-            theme={Themes[this.state.theme]}
-            series={[
-              {
-                data: [{x: 0, y: 5}, {x: 1, y: 2}, {x: 2, y: 12}, {x: 3, y: 1}]
-              },
-              {
-                data: [{x: 0, y: 2}, {x: 1, y: 1}, {x: 2, y: 7}, {x: 3, y: 12}]
-              },
-              {
-                data: [{x: 0, y: 15}, {x: 1, y: 6}, {x: 2, y: 2}, {x: 3, y: 6}]
-              },
-              {
-                data: [{x: 0, y: 3}, {x: 1, y: 12}, {x: 2, y: 3}, {x: 3, y: 5}]
-              },
-              {
-                data: [{x: 0, y: 11}, {x: 1, y: 15}, {x: 2, y: 19}, {x: 3, y: 5}]
-              }
-            ]}
-          />
-        </div>
-        <div style={{width: "450px", display: "inline-block", margin: "1%"}}>
-          <VictoryBarChart
-            horizontal
-            stacked
-            title="VictoryBarChart"
-            theme={Themes[this.state.theme]}
-            series={[
-              {
-                type: "bar",
-                data: [{x: 1, y: 5}, {x: 2, y: 2}, {x: 3, y: 12}, {x: 4, y: 1}]
-              },
-              {
-                type: "bar",
-                data: [{x: 1, y: 2}, {x: 2, y: 1}, {x: 3, y: 7}, {x: 4, y: 12}]
-              },
-              {
-                type: "bar",
-                data: [{x: 1, y: 15}, {x: 2, y: 6}, {x: 3, y: 2}, {x: 4, y: 6}]
-              },
-              {
-                type: "bar",
-                data: [{x: 1, y: 5}, {x: 2, y: 16}, {x: 3, y: 22}, {x: 4, y: 6}]
-              }
-            ]}
-          />
-        </div>
-        <div style={{width: "450px", display: "inline-block", margin: "1%"}}>
-          <VictoryScatterChart
-            title="VictoryScatterChart"
-            theme={Themes[this.state.theme]}
-            series={[
-              {
-                data: [{x: 0, y: 5}, {x: 1, y: 2}, {x: 2, y: 12}, {x: 3, y: 1}],
-                symbol: "diamond"
-              },
-              {
-                data: [{x: 0, y: 2}, {x: 1, y: 1}, {x: 2, y: 7}, {x: 3, y: 12}]
-              },
-              {
-                data: [{x: 0, y: 15}, {x: 1, y: 6}, {x: 2, y: 2}, {x: 3, y: 6}]
-              },
-              {
-                data: [{x: 0, y: 3}, {x: 1, y: 12}, {x: 2, y: 3}, {x: 3, y: 5}]
-              },
-              {
-                data: [{x: 0, y: 11}, {x: 1, y: 15}, {x: 2, y: 19}, {x: 3, y: 5}]
-              }
-            ]}
-            symbol="star"
-          />
-        </div>
-        <div style={{width: "450px", display: "inline-block", margin: "1%"}}>
-          <VictoryPieChart
-            title="VictoryPieChart"
-            innerRadius={100}
-            theme={Themes[this.state.theme]}
-            data={[
-              {x: "A", y: 10},
-              {x: "B", y: 3},
-              {x: "C", y: 6}
-            ]}
-          />
+        </label>
+        <label>
+        Component:
+        <select
+          style={{
+            display: "inline-block",
+            margin: "1%"
+          }}
+          onChange={this.handleComponentChange}
+        >
+          <option value="areaChart" defaultValue>VictoryAreaChart</option>
+          <option value="barChart">VictoryBarChart</option>
+          <option value="lineChart">VictoryLineChart</option>
+          <option value="pieChart">VictoryPieChart</option>
+          <option value="scatterChart">VictoryScatterChart</option>
+          <option value="composedStandalone">VictoryStandalone</option>
+        </select>
+        </label>
+        <button type="button" onClick={this.handleNewData}>Generate random data</button>
+        <div style={{width: "450px", display: "block", margin: "auto"}}>
+          <ComponentPreview theme={this.state.theme} data={this.state.data} />
         </div>
       </div>
     );

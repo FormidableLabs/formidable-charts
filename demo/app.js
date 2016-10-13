@@ -13,7 +13,6 @@ const App = React.createClass({
   render() {
     return (
       <div>
-        <h1>Victory Composed Demo</h1>
         <VictoryComposedDemo />
       </div>
     );

@@ -1,25 +1,26 @@
-import React, { PropTypes } from "react";
+import React from "react";
 
 import { VictoryScatter } from "victory-chart";
 
-const ComposedScatter = (props) => (
+import { VictoryTooltip } from "victory-core";
+
+export default (props) => ([
   <VictoryScatter
     {...props}
+    size={props.size || 5}
     style={{
       ...props.style,
       data: {
         fill: props.seriesColor
       }
     }}
+    labels={props.labels ? props.labels : ((d) => d.y)}
+    labelComponent={<VictoryTooltip />}
     animate={{
-      duration: 200
+      duration: 500,
+      onLoad: {
+        duration: 500
+      }
     }}
   />
-);
-
-ComposedScatter.propTypes = {
-  seriesColor: PropTypes.string,
-  style: PropTypes.object
-};
-
-export default ComposedScatter;
+]);

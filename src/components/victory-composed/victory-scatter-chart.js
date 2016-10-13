@@ -41,8 +41,8 @@ export default class VictoryScatterChart extends React.Component {
           PropTypes.func,
           PropTypes.arrayOf(PropTypes.string)
         ]),
-        name: PropTypes.string,
         samples: PropTypes.number,
+        size: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
         style: PropTypes.object,
         symbol: PropTypes.oneOfType([
           PropTypes.oneOf([
@@ -60,7 +60,7 @@ export default class VictoryScatterChart extends React.Component {
         ])
       })
     ),
-    size: PropTypes.number,
+    size: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
     subtitle: PropTypes.string,
     symbol: PropTypes.oneOfType([
       PropTypes.oneOf([
@@ -104,7 +104,7 @@ export default class VictoryScatterChart extends React.Component {
     props.bubbleProperty = serie.bubbleProperty || undefined;
     props.categories = this.props.categories;
     props.samples = serie.samples || undefined;
-    props.size = this.props.size;
+    props.size = serie.size || this.props.size;
     props.symbol = serie.symbol || this.props.symbol || undefined;
 
     props.x = serie.x || undefined;

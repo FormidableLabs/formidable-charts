@@ -192,24 +192,24 @@ export default {
     ...baseProps
   },
   tooltip: {
+    padding: 10,
     style: {
       data: {
         fill: "transparent",
-        stroke: "transparent",
+        stroke: "primary",
         strokeWidth: 0
       },
       labels: centeredLabelStyles,
       flyout: {
         stroke: primary,
         strokeWidth: 1,
-        fill: "#333333"
+        fill: "#000"
       }
     },
     flyoutProps: {
       cornerRadius: 2,
       pointerLength: 0
-    },
-    ...baseProps
+    }
   },
   voronoi: {
     style: {

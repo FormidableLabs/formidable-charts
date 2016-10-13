@@ -179,20 +179,20 @@ export default class VictoryStandalone extends React.Component {
       // Default type to line
       const type = serie.type || "line";
 
-      if (serie.type !== "stack" && serie.type !== "group") {
+      if (type !== "stack" && type !== "group") {
         // Get function based upon type
-        const renderComposition = this.props.theme[serie.type];
+        const renderComposition = this.props.theme[type];
         // Get reduced prop set to pass to child
         const targetProps = this.getRenderableProps(serie, type, index);
         // Concat new elements onto elements array
         elements = elements.concat(renderComposition(targetProps));
-      } else if (serie.type === "stack") {
+      } else if (type === "stack") {
         elements = elements.concat([
           <VictoryStack key={`stack-${index}`}>
             {this.renderSeries(serie.data)}
           </VictoryStack>
         ]);
-      } else if (serie.type === "group") {
+      } else if (type === "group") {
         elements = elements.concat([
           <VictoryGroup offset={20} key={`group-${index}`}>
             {this.renderSeries(serie.data)}

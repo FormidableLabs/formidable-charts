@@ -37,6 +37,7 @@ export default class VictoryBarChart extends React.Component {
         y: PropTypes.number
       })
     ]),
+    horizontal: PropTypes.bool,
     labels: PropTypes.oneOfType([
       PropTypes.func,
       PropTypes.arrayOf(PropTypes.string)

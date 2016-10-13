@@ -41,7 +41,6 @@ export default class VictoryLineChart extends React.Component {
     series: PropTypes.arrayOf(
       PropTypes.shape({
         data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-        name: PropTypes.string,
         samples: PropTypes.number,
         style: PropTypes.object,
         x: PropTypes.oneOfType([
