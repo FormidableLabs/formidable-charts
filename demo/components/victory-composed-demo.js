@@ -11,14 +11,40 @@ import {
 } from "../../src";
 
 export default class Wrapper extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      theme: "bright"
+    };
+
+    this.handleSelectChange = this.handleSelectChange.bind(this);
+  }
+  handleSelectChange(e) {
+    this.setState({
+      theme: e.target.value
+    });
+  }
   render() {
     return (
       <div>
+        <select
+          style={{
+            display: "block",
+            margin: "1%"
+          }}
+          onChange={this.handleSelectChange}
+        >
+          <option value="bright" defaultValue>Bright</option>
+          <option value="simple">Simple</option>
+          <option value="dark">Dark</option>
+          <option value="danceparty">Dance Party</option>
+        </select>
         <div style={{width: "450px", display: "inline-block", margin: "1%"}}>
           <VictoryStandalone
             title="VictoryStandalone"
             subtitle="Line Demo"
-            theme={Themes.SarahsTheme}
+            theme={Themes[this.state.theme]}
             series={[
               {
                 type: "line",
@@ -47,6 +73,7 @@ export default class Wrapper extends React.Component {
           <VictoryStandalone
             title="VictoryStandalone"
             subtitle="Area Demo"
+            theme={Themes[this.state.theme]}
             series={[
               {
                 type: "stack",
@@ -76,6 +103,7 @@ export default class Wrapper extends React.Component {
           <VictoryStandalone
             title="VictoryStandalone"
             subtitle="Bar Demo"
+            theme={Themes[this.state.theme]}
             series={[
               {
                 type: "group",
@@ -105,6 +133,7 @@ export default class Wrapper extends React.Component {
           <VictoryStandalone
             title="VictoryStandalone"
             subtitle="Scatter Demo"
+            theme={Themes[this.state.theme]}
             xAxis={{
               tickValues: ["test", "test2", "test3", "test4", "test5"]
             }}
@@ -128,6 +157,7 @@ export default class Wrapper extends React.Component {
           <VictoryLineChart
             interpolation="cardinal"
             title="VictoryLineChart"
+            theme={Themes[this.state.theme]}
             series={[
               {
                 data: [{x: 0, y: 5}, {x: 1, y: 2}, {x: 2, y: 12}, {x: 3, y: 1}]
@@ -152,6 +182,7 @@ export default class Wrapper extends React.Component {
             interpolation="natural"
             stacked
             title="VictoryAreaChart"
+            theme={Themes[this.state.theme]}
             series={[
               {
                 data: [{x: 0, y: 5}, {x: 1, y: 2}, {x: 2, y: 12}, {x: 3, y: 1}]
@@ -176,6 +207,7 @@ export default class Wrapper extends React.Component {
             horizontal
             stacked
             title="VictoryBarChart"
+            theme={Themes[this.state.theme]}
             series={[
               {
                 type: "bar",
@@ -199,6 +231,7 @@ export default class Wrapper extends React.Component {
         <div style={{width: "450px", display: "inline-block", margin: "1%"}}>
           <VictoryScatterChart
             title="VictoryScatterChart"
+            theme={Themes[this.state.theme]}
             series={[
               {
                 data: [{x: 0, y: 5}, {x: 1, y: 2}, {x: 2, y: 12}, {x: 3, y: 1}],
@@ -224,6 +257,7 @@ export default class Wrapper extends React.Component {
           <VictoryPieChart
             title="VictoryPieChart"
             innerRadius={100}
+            theme={Themes[this.state.theme]}
             data={[
               {x: "A", y: 10},
               {x: "B", y: 3},

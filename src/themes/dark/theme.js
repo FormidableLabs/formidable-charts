@@ -2,22 +2,22 @@
 // * Colors
 // *
 const colors = [
-  "#4DD0E1",
-  "#9575CD",
-  "#FF6E40",
-  "#00E676",
-  "#80D8FF",
-  "#FFEE58",
-  "#FFA000",
-  "#4CAF50",
-  "#2979FF"
+  "#e74c3c",
+  "#3498db",
+  "#f1c40f",
+  "#9b59b6",
+  "#e67e22",
+  "#1abc9c",
+  "#95a5a6",
+  "#34495e"
 ];
 
-const primary = "#333";
+const primary = "#aaa";
 // *
 // * Typography
 // *
-const sansSerif = "Futura, 'Trebuchet MS', Arial, sans-serif";
+const sansSerif =
+  "'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Geneva, Verdana, sans-serif";
 const letterSpacing = "normal";
 const fontSize = 14;
 // *
@@ -45,6 +45,7 @@ const centeredLabelStyles = { textAnchor: "middle", ...baseLabelStyles };
 // *
 // * Strokes
 // *
+const strokeDasharray = "10, 5";
 const strokeLinecap = "round";
 const strokeLinejoin = "round";
 
@@ -74,8 +75,9 @@ export default {
       },
       grid: {
         fill: "transparent",
-        stroke: "transparent",
+        stroke: primary,
         opacity: 0.25,
+        strokeDasharray,
         strokeLinecap,
         strokeLinejoin
       },
@@ -121,7 +123,7 @@ export default {
   chart: {
     style: {
       parent: {
-        background: "transparent"
+        background: "#222222"
       }
     },
     ...baseProps

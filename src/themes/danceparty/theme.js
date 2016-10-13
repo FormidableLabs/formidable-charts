@@ -2,22 +2,22 @@
 // * Colors
 // *
 const colors = [
-  "#4DD0E1",
-  "#9575CD",
-  "#FF6E40",
-  "#00E676",
-  "#80D8FF",
-  "#FFEE58",
-  "#FFA000",
-  "#4CAF50",
-  "#2979FF"
+  "#AAFF00",
+  "#FFAA00",
+  "#FF00AA",
+  "#AA00FF",
+  "#FFFB00",
+  "#FA023C",
+  "#CC37C2",
+  "#46E4BC",
+  "#00AAFF"
 ];
 
-const primary = "#333";
+const primary = "#ff00ff";
 // *
 // * Typography
 // *
-const sansSerif = "Futura, 'Trebuchet MS', Arial, sans-serif";
+const sansSerif = "'Courier New',Courier,'Lucida Sans Typewriter','Lucida Typewriter',monospace";
 const letterSpacing = "normal";
 const fontSize = 14;
 // *
@@ -121,7 +121,7 @@ export default {
   chart: {
     style: {
       parent: {
-        background: "transparent"
+        background: "#000"
       }
     },
     ...baseProps
@@ -148,7 +148,7 @@ export default {
         opacity: 0.85,
         fill: "transparent",
         stroke: primary,
-        strokeWidth: 2
+        strokeWidth: 2,
       },
       labels: {
         ...baseLabelStyles,

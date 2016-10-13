@@ -46,6 +46,7 @@ export default class VictoryAreaChart extends React.Component {
       PropTypes.shape({
         data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
         name: PropTypes.string,
+        samples: PropTypes.number,
         style: PropTypes.object,
         x: PropTypes.oneOfType([
           PropTypes.string,
@@ -79,7 +80,8 @@ export default class VictoryAreaChart extends React.Component {
     height: 300,
     theme: Themes.simple,
     series: [{
-      y: (data) => Math.sin(2 * Math.PI * data.x)
+      y: (data) => Math.sin(2 * Math.PI * data.x),
+      samples: 10
     }],
     width: 450
   };
@@ -89,6 +91,7 @@ export default class VictoryAreaChart extends React.Component {
     // Key = type + index
     props.key = `area-${index}`;
 
+    props.samples = serie.samples;
     props.x = serie.x || undefined;
     props.y = serie.y || undefined;
 
@@ -151,7 +154,7 @@ export default class VictoryAreaChart extends React.Component {
           verticalAnchor="start"
           style={{
             ...theme.bar.style.labels,
-            fontSize: 18
+            fontSize: theme.bar.style.labels.fontSize + 4
           }}
           text={title}
         />
@@ -161,7 +164,7 @@ export default class VictoryAreaChart extends React.Component {
           y={32}
           style={{
             ...theme.bar.style.labels,
-            fontSize: 12,
+            fontSize: theme.bar.style.labels.fontSize + 2,
             parent: {
               paddingBottom: 20
             }

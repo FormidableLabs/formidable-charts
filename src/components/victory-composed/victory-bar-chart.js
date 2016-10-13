@@ -159,7 +159,7 @@ export default class VictoryBarChart extends React.Component {
           verticalAnchor="start"
           style={{
             ...theme.bar.style.labels,
-            fontSize: 18
+            fontSize: theme.bar.style.labels.fontSize + 4
           }}
           text={title}
         />
@@ -169,7 +169,7 @@ export default class VictoryBarChart extends React.Component {
           y={32}
           style={{
             ...theme.bar.style.labels,
-            fontSize: 12,
+            fontSize: theme.bar.style.labels.fontSize + 2,
             parent: {
               paddingBottom: 20
             }
