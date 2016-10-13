@@ -148,7 +148,7 @@ export default {
         opacity: 0.85,
         fill: "transparent",
         stroke: primary,
-        strokeWidth: 2,
+        strokeWidth: 2
       },
       labels: {
         ...baseLabelStyles,
