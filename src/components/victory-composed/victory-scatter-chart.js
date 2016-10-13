@@ -35,16 +35,6 @@ export default class VictoryScatterChart extends React.Component {
     height: PropTypes.number,
     series: PropTypes.arrayOf(
       PropTypes.shape({
-        accessors: PropTypes.shape({
-          x: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.func
-          ]),
-          y: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.func
-          ])
-        }),
         bubbleProperty: PropTypes.string,
         data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
         labels: PropTypes.oneOfType([
@@ -52,15 +42,25 @@ export default class VictoryScatterChart extends React.Component {
           PropTypes.arrayOf(PropTypes.string)
         ]),
         name: PropTypes.string,
+        samples: PropTypes.number,
         style: PropTypes.object,
         symbol: PropTypes.oneOfType([
           PropTypes.oneOf([
             "circle", "diamond", "plus", "square", "star", "triangleDown", "triangleUp"
           ]),
           PropTypes.func
+        ]),
+        x: PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.func
+        ]),
+        y: PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.func
         ])
       })
     ),
+    size: PropTypes.number,
     subtitle: PropTypes.string,
     symbol: PropTypes.oneOfType([
       PropTypes.oneOf([
@@ -88,25 +88,27 @@ export default class VictoryScatterChart extends React.Component {
     height: 300,
     theme: Themes.simple,
     series: [{
-      accessors: { y: (data) => Math.sin(2 * Math.PI * data.x) }
+      y: (data) => Math.sin(2 * Math.PI * data.x),
+      samples: 10
     }],
+    size: 4,
     width: 450
   };
 
   getRenderableProps(serie, index) {
-    const props = {};
     // Key = type + index
-    props.key = `scatter-${index}`;
+    const props = {
+      key: `scatter-${index}`
+    };
 
     props.bubbleProperty = serie.bubbleProperty || undefined;
     props.categories = this.props.categories;
+    props.samples = serie.samples || undefined;
+    props.size = this.props.size;
     props.symbol = serie.symbol || this.props.symbol || undefined;
 
-    // Add accessors if available
-    if (serie.accessors) {
-      props.x = serie.accessors.x || undefined;
-      props.y = serie.accessors.y || undefined;
-    }
+    props.x = serie.x || undefined;
+    props.y = serie.y || undefined;
 
     // Add data if available
     props.data = serie.data || undefined;

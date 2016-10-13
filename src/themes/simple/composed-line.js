@@ -16,6 +16,7 @@ export default (props) => ([
       }}
     />
     <VictoryScatter
+      {...props}
       style={{
         data: {
           fill: props.seriesColor,

@@ -34,20 +34,18 @@ export default class VictoryStandalone extends React.Component {
     labelFormat: PropTypes.func,
     series: PropTypes.arrayOf(
       PropTypes.shape({
-        accessors: PropTypes.shape({
-          x: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.func
-          ]),
-          y: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.func
-          ])
-        }),
         data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
         name: PropTypes.string,
         style: PropTypes.object,
-        type: PropTypes.string
+        type: PropTypes.string,
+        x: PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.func
+        ]),
+        y: PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.func
+        ])
       })
     ),
     subtitle: PropTypes.string,
@@ -71,34 +69,25 @@ export default class VictoryStandalone extends React.Component {
     height: 300,
     theme: Themes.simple,
     series: [{
-      accessors: { y: (data) => Math.sin(2 * Math.PI * data.x) },
+      y: (data) => Math.sin(2 * Math.PI * data.x),
       type: "line"
     }],
     width: 450
   };
 
   getRenderableProps(serie, type, index) {
-    const props = {};
+    const { theme, ...renderableProps } = serie;
     // Key = type + index
-    props.key = `${type}-${index}`;
-
-    // Add accessors if available
-    if (serie.accessors) {
-      props.x = serie.accessors.x || undefined;
-      props.y = serie.accessors.y || undefined;
-    }
-
-    // Add data if available
-    props.data = serie.data || undefined;
+    renderableProps.key = `${type}-${index}`;
 
     // Get color
-    const { theme } = this.props.theme;
-    const colors = theme.group.colorScale;
+    const { theme: styleTheme } = this.props.theme;
+    const colors = styleTheme.group.colorScale;
 
-    props.theme = theme;
-    props.seriesColor = colors[index % colors.length];
+    renderableProps.theme = styleTheme;
+    renderableProps.seriesColor = colors[index % colors.length];
 
-    return props;
+    return renderableProps;
   }
 
   renderContainer() {

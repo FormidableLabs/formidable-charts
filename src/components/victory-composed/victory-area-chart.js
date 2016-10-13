@@ -44,19 +44,17 @@ export default class VictoryAreaChart extends React.Component {
     ]),
     series: PropTypes.arrayOf(
       PropTypes.shape({
-        accessors: PropTypes.shape({
-          x: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.func
-          ]),
-          y: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.func
-          ])
-        }),
         data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
         name: PropTypes.string,
-        style: PropTypes.object
+        style: PropTypes.object,
+        x: PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.func
+        ]),
+        y: PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.func
+        ])
       })
     ),
     stacked: PropTypes.bool,
@@ -81,7 +79,7 @@ export default class VictoryAreaChart extends React.Component {
     height: 300,
     theme: Themes.simple,
     series: [{
-      accessors: { y: (data) => Math.sin(2 * Math.PI * data.x) }
+      y: (data) => Math.sin(2 * Math.PI * data.x)
     }],
     width: 450
   };
@@ -91,11 +89,8 @@ export default class VictoryAreaChart extends React.Component {
     // Key = type + index
     props.key = `area-${index}`;
 
-    // Add accessors if available
-    if (serie.accessors) {
-      props.x = serie.accessors.x || undefined;
-      props.y = serie.accessors.y || undefined;
-    }
+    props.x = serie.x || undefined;
+    props.y = serie.y || undefined;
 
     props.interpolation = this.props.interpolation;
 

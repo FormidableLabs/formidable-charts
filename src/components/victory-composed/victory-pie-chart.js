@@ -1,11 +1,6 @@
 import React, { PropTypes } from "react";
 
 import {
-  VictoryGroup,
-  VictoryStack
-} from "victory-chart";
-
-import {
   VictoryLabel,
   VictoryContainer
 } from "victory-core";
@@ -16,38 +11,17 @@ export default class VictoryPieChart extends React.Component {
   static displayName = "VictoryPieChart";
 
   static propTypes = {
-    domain: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.number),
-      PropTypes.shape({
-        x: PropTypes.arrayOf(PropTypes.number),
-        y: PropTypes.arrayOf(PropTypes.number)
-      })
-    ]),
-    domainPadding: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.shape({
-        x: PropTypes.number,
-        y: PropTypes.number
-      })
-    ]),
+    cornerRadius: PropTypes.number,
+    data: PropTypes.array,
+    endAngle: PropTypes.number,
     height: PropTypes.number,
-    series: PropTypes.arrayOf(
-      PropTypes.shape({
-        accessors: PropTypes.shape({
-          x: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.func
-          ]),
-          y: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.func
-          ])
-        }),
-        data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-        name: PropTypes.string,
-        style: PropTypes.object
-      })
-    ),
+    innerRadius: PropTypes.number,
+    labels: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.arrayOf(PropTypes.string)
+    ]),
+    padAngle: PropTypes.number,
+    startAngle: PropTypes.number,
     subtitle: PropTypes.string,
     theme: PropTypes.shape({
       area: PropTypes.func,
@@ -61,79 +35,71 @@ export default class VictoryPieChart extends React.Component {
     }),
     title: PropTypes.string,
     width: PropTypes.number,
-    xAxis: PropTypes.object,
-    yAxis: PropTypes.object
+    x: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.number,
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string)
+    ]),
+    y: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.number,
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string)
+    ])
   };
 
   static defaultProps = {
+    data: [
+      {x: "A", y: 10},
+      {x: "B", y: 3},
+      {x: "C", y: 6}
+    ],
     height: 300,
     theme: Themes.simple,
-    series: [{
-      accessors: { y: (data) => Math.sin(2 * Math.PI * data.x) }
-    }],
     width: 450
   };
 
-  getRenderableProps(serie, type, index) {
-    const props = {};
-    // Key = type + index
-    props.key = `${type}-${index}`;
-
-    // Add accessors if available
-    if (serie.accessors) {
-      props.x = serie.accessors.x || undefined;
-      props.y = serie.accessors.y || undefined;
-    }
-
+  getRenderableProps() {
+    const { height, width, title, subtitle, theme, ...renderableProps } = this.props;
     // Add data if available
-    props.data = serie.data || undefined;
+    renderableProps.key = "pie";
+    renderableProps.standalone = true;
+    renderableProps.padding = {
+      top: this.props.subtitle || this.props.title ? 100 : 50,
+      left: 75,
+      bottom: 50,
+      right: 75
+    };
 
     // Get color
-    const { theme } = this.props.theme;
-    const colors = theme.group.colorScale;
+    const { theme: styleTheme } = this.props.theme;
+    renderableProps.theme = styleTheme;
 
-    props.theme = theme;
-    props.seriesColor = colors[index % colors.length];
-
-    return props;
+    return renderableProps;
   }
 
   renderContainer() {
     // Get VictoryChart & theme from theme prop
-    const { chart: Chart, theme } = this.props.theme;
+    const { theme } = this.props.theme;
     // Pull out relevant props
     const {
       height,
       width,
-      domain,
-      domainPadding,
       title,
       subtitle
      } = this.props;
 
     return (
-      <Chart
-        containerComponent={
-          <VictoryContainer
-            title={title}
-            desc={subtitle}
-          />
-        }
+      <VictoryContainer
         height={height}
         width={width}
-        domain={domain}
-        domainPadding={domainPadding}
-        theme={theme}
-        padding={{
-          top: this.props.subtitle || this.props.title ? 75 : 25,
-          left: 50,
-          bottom: 50,
-          right: 50
-        }}
-        style={{...theme.chart.style, parent: {
+        title={title}
+        desc={subtitle}
+        style={{
           ...theme.chart.style.parent,
           paddingTop: 25
-        }}}
+        }}
       >
         <VictoryLabel
           x={width / 2}
@@ -161,53 +127,18 @@ export default class VictoryPieChart extends React.Component {
           verticalAnchor="start"
         />
 
-        {this.renderAxis("xAxis")}
-        {this.renderAxis("yAxis", {dependentAxis: true})}
+        {this.renderPie()}
 
-        {this.renderSeries(this.props.series)}
-
-      </Chart>
+      </VictoryContainer>
     );
   }
 
-  renderAxis(key, options) {
-    const { axis } = this.props.theme;
-    const axisProps = this.props[key];
-    return axis({...options, ...axisProps});
-  }
-
-  renderSeries(series) {
-    // Create empty elements array
-    let elements = [];
-
-    // For each series
-    series.forEach((serie, index) => {
-      // Default type to line
-      const type = serie.type || "line";
-
-      if (serie.type !== "stack" && serie.type !== "group") {
-        // Get function based upon type
-        const renderComposition = this.props.theme[serie.type];
-        // Get reduced prop set to pass to child
-        const targetProps = this.getRenderableProps(serie, type, index);
-        // Concat new elements onto elements array
-        elements = elements.concat(renderComposition(targetProps));
-      } else if (serie.type === "stack") {
-        elements = elements.concat([
-          <VictoryStack key={`stack-${index}`}>
-            {this.renderSeries(serie.data)}
-          </VictoryStack>
-        ]);
-      } else if (serie.type === "group") {
-        elements = elements.concat([
-          <VictoryGroup offset={20} key={`group-${index}`}>
-            {this.renderSeries(serie.data)}
-          </VictoryGroup>
-        ]);
-      }
-    });
-
-    return elements;
+  renderPie() {
+    // Get function based upon type
+    const renderComposition = this.props.theme.pie;
+    // Get reduced prop set to pass to child
+    const targetProps = this.getRenderableProps();
+    return renderComposition(targetProps);
   }
 
   render() {

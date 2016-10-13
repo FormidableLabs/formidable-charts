@@ -40,19 +40,18 @@ export default class VictoryLineChart extends React.Component {
     ]),
     series: PropTypes.arrayOf(
       PropTypes.shape({
-        accessors: PropTypes.shape({
-          x: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.func
-          ]),
-          y: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.func
-          ])
-        }),
         data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
         name: PropTypes.string,
-        style: PropTypes.object
+        samples: PropTypes.number,
+        style: PropTypes.object,
+        x: PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.func
+        ]),
+        y: PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.func
+        ])
       })
     ),
     subtitle: PropTypes.string,
@@ -76,7 +75,8 @@ export default class VictoryLineChart extends React.Component {
     height: 300,
     theme: Themes.simple,
     series: [{
-      accessors: { y: (data) => Math.sin(2 * Math.PI * data.x) }
+      y: (data) => Math.sin(2 * Math.PI * data.x),
+      samples: 10
     }],
     width: 450
   };
@@ -86,11 +86,9 @@ export default class VictoryLineChart extends React.Component {
     // Key = type + index
     props.key = `line-${index}`;
 
-    // Add accessors if available
-    if (serie.accessors) {
-      props.x = serie.accessors.x || undefined;
-      props.y = serie.accessors.y || undefined;
-    }
+    props.samples = serie.samples;
+    props.x = serie.x || undefined;
+    props.y = serie.y || undefined;
 
     props.categories = this.props.categories;
     props.interpolation = this.props.interpolation;

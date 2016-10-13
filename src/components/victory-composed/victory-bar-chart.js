@@ -45,23 +45,21 @@ export default class VictoryBarChart extends React.Component {
     offset: PropTypes.number,
     series: PropTypes.arrayOf(
       PropTypes.shape({
-        accessors: PropTypes.shape({
-          x: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.func
-          ]),
-          y: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.func
-          ])
-        }),
         labels: PropTypes.oneOfType([
           PropTypes.func,
           PropTypes.arrayOf(PropTypes.string)
         ]),
         data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
         name: PropTypes.string,
-        style: PropTypes.object
+        style: PropTypes.object,
+        x: PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.func
+        ]),
+        y: PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.func
+        ])
       })
     ),
     stacked: PropTypes.bool,
@@ -86,7 +84,11 @@ export default class VictoryBarChart extends React.Component {
     height: 300,
     theme: Themes.simple,
     series: [{
-      accessors: { y: (data) => Math.sin(2 * Math.PI * data.x) }
+      data: [
+        {x: 1, y: 3},
+        {x: 3, y: 6},
+        {x: 5, y: 9}
+      ]
     }],
     offset: 15,
     width: 450
@@ -97,11 +99,8 @@ export default class VictoryBarChart extends React.Component {
     // Key = type + index
     props.key = `bar-${index}`;
 
-    // Add accessors if available
-    if (serie.accessors) {
-      props.x = serie.accessors.x || undefined;
-      props.y = serie.accessors.y || undefined;
-    }
+    props.x = serie.x || undefined;
+    props.y = serie.y || undefined;
 
     // Add data if available
     props.data = serie.data || undefined;

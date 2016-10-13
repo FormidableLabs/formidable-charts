@@ -6,6 +6,7 @@ import {
   VictoryBarChart,
   VictoryLineChart,
   VictoryScatterChart,
+  VictoryPieChart,
   Themes
 } from "../../src";
 
@@ -13,7 +14,7 @@ export default class Wrapper extends React.Component {
   render() {
     return (
       <div>
-        <div style={{width: "600px", display: "inline-block", margin: "1%"}}>
+        <div style={{width: "450px", display: "inline-block", margin: "1%"}}>
           <VictoryStandalone
             title="VictoryStandalone"
             subtitle="Line Demo"
@@ -42,7 +43,7 @@ export default class Wrapper extends React.Component {
             ]}
           />
         </div>
-        <div style={{width: "600px", display: "inline-block", margin: "1%"}}>
+        <div style={{width: "450px", display: "inline-block", margin: "1%"}}>
           <VictoryStandalone
             title="VictoryStandalone"
             subtitle="Area Demo"
@@ -71,7 +72,7 @@ export default class Wrapper extends React.Component {
             ]}
           />
         </div>
-        <div style={{width: "600px", display: "inline-block", margin: "1%"}}>
+        <div style={{width: "450px", display: "inline-block", margin: "1%"}}>
           <VictoryStandalone
             title="VictoryStandalone"
             subtitle="Bar Demo"
@@ -100,7 +101,7 @@ export default class Wrapper extends React.Component {
             ]}
           />
         </div>
-        <div style={{width: "600px", display: "inline-block", margin: "1%"}}>
+        <div style={{width: "450px", display: "inline-block", margin: "1%"}}>
           <VictoryStandalone
             title="VictoryStandalone"
             subtitle="Scatter Demo"
@@ -123,7 +124,7 @@ export default class Wrapper extends React.Component {
             ]}
           />
         </div>
-        <div style={{width: "600px", display: "inline-block", margin: "1%"}}>
+        <div style={{width: "450px", display: "inline-block", margin: "1%"}}>
           <VictoryLineChart
             interpolation="cardinal"
             title="VictoryLineChart"
@@ -146,7 +147,7 @@ export default class Wrapper extends React.Component {
             ]}
           />
         </div>
-        <div style={{width: "600px", display: "inline-block", margin: "1%"}}>
+        <div style={{width: "450px", display: "inline-block", margin: "1%"}}>
           <VictoryAreaChart
             interpolation="natural"
             stacked
@@ -170,7 +171,7 @@ export default class Wrapper extends React.Component {
             ]}
           />
         </div>
-        <div style={{width: "600px", display: "inline-block", margin: "1%"}}>
+        <div style={{width: "450px", display: "inline-block", margin: "1%"}}>
           <VictoryBarChart
             horizontal
             stacked
@@ -195,7 +196,7 @@ export default class Wrapper extends React.Component {
             ]}
           />
         </div>
-        <div style={{width: "600px", display: "inline-block", margin: "1%"}}>
+        <div style={{width: "450px", display: "inline-block", margin: "1%"}}>
           <VictoryScatterChart
             title="VictoryScatterChart"
             series={[
@@ -217,6 +218,17 @@ export default class Wrapper extends React.Component {
               }
             ]}
             symbol="star"
+          />
+        </div>
+        <div style={{width: "450px", display: "inline-block", margin: "1%"}}>
+          <VictoryPieChart
+            title="VictoryPieChart"
+            innerRadius={100}
+            data={[
+              {x: "A", y: 10},
+              {x: "B", y: 3},
+              {x: "C", y: 6}
+            ]}
           />
         </div>
       </div>
