@@ -35,6 +35,13 @@
 	npm install victory-composed --save
 	```
 
+  For React Native, you'll need `victory-native` and `react-native-svg`:
+
+  ```sh
+  npm install victory-native victory-composed react-native-svg --save
+  react-native link react-native-svg
+  ```
+
 2. Add your first `victory-composed` component:
 
 	```js
