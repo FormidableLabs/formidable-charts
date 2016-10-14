@@ -1,8 +1,8 @@
 import React from "react";
 
-import { VictoryScatter } from "victory-chart";
+import { VictoryScatter } from "../../victory/victory-chart";
 
-import { VictoryTooltip } from "victory-core";
+import { VictoryTooltip } from "../../victory/victory-core";
 
 export default (props) => ([
   <VictoryScatter

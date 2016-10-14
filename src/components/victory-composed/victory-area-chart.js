@@ -2,12 +2,12 @@ import React, { PropTypes } from "react";
 
 import {
   VictoryStack
-} from "victory-chart";
+} from "../../victory/victory-chart";
 
 import {
   VictoryLabel,
   VictoryContainer
-} from "victory-core";
+} from "../../victory/victory-core";
 
 import Themes from "../../themes";
 
