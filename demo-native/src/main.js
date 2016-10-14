@@ -4,6 +4,8 @@ import {
   Text,
   View,
   StyleSheet,
+  ScrollView,
+  Platform,
   Dimensions,
   StatusBar,
   TouchableOpacity
@@ -47,14 +49,13 @@ const themes = {
   },
   "dark": {
     backgroundColor: "black",
-    accentColor: "purple",
+    accentColor: "#9b59b6",
     statusBarColor: "light-content"
   },
   "danceparty": {
     backgroundColor: "black",
     accentColor: "#abe537",
     statusBarColor: "light-content"
-
   }
 };
 
@@ -158,7 +159,9 @@ export default class Wrapper extends React.Component {
   }
   handleThemeChange(theme) {
     this.setState({ theme });
-    StatusBar.setBarStyle(themes[theme].statusBarColor);
+    if (Platform.OS === "ios") {
+      StatusBar.setBarStyle(themes[theme].statusBarColor);
+    }
   }
   handleComponentChange(component) {
     this.setState({ component });
@@ -167,7 +170,7 @@ export default class Wrapper extends React.Component {
     const ComponentPreview = ComponentDemos[this.state.component];
     const { backgroundColor, accentColor } = themes[this.state.theme];
     return (
-      <View style={[styles.container, { backgroundColor }]}>
+      <ScrollView style={[styles.container, { backgroundColor }]}>
         <ComponentPreview theme={this.state.theme} data={this.state.data} />
         <View style={styles.controls}>
           <View style={styles.options}>
@@ -195,7 +198,7 @@ export default class Wrapper extends React.Component {
             </Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
