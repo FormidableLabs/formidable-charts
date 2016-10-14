@@ -2,7 +2,8 @@
   "name": "victory-composed",
   "version": "0.0.1",
   "description": "Top level composed component for Victory",
-  "main": "src/index.js",
+  "main": "lib/index.js",
+  "react-native": "src/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/formidablelabs/victory-composed.git"
