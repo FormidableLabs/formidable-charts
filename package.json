@@ -1,5 +1,5 @@
 {
-  "name": "victory-composition",
+  "name": "victory-composed",
   "version": "0.0.1",
   "description": "Top level composed component for Victory",
   "main": "lib/index.js",
