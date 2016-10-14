@@ -4,9 +4,9 @@ import {
   VictoryArea,
   VictoryGroup,
   VictoryVoronoiTooltip
-} from "victory-chart";
+} from "../../victory/victory-chart";
 
-import { VictoryTooltip } from "victory-core";
+import { VictoryTooltip } from "../../victory/victory-core";
 
 export default (props) => ([
   <VictoryGroup {...props}>
