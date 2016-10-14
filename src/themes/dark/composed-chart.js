@@ -1,6 +1,6 @@
 import React, { PropTypes } from "react";
 
-import { VictoryChart } from "victory-chart";
+import { VictoryChart } from "../../victory/victory-chart";
 
 export default class ComposedWrapper extends React.Component {
   static propTypes = {

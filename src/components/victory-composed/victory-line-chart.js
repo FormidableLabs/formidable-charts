@@ -3,7 +3,7 @@ import React, { PropTypes } from "react";
 import {
   VictoryLabel,
   VictoryContainer
-} from "victory-core";
+} from "../../victory/victory-core";
 
 import Themes from "../../themes";
 
