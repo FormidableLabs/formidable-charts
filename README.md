@@ -133,7 +133,7 @@ The width props specifies the width of the svg viewBox of the chart container. T
 
 #####xAxis `object`
 
-This prop specifies a set of props to pass to the x axis. Valid props can be found here: [Axis](https://formidable.com/open-source//docs/-axis#props)
+This prop specifies a set of props to pass to the x axis. Valid props can be found here: [VictoryAxis](https://formidable.com/open-source/victory/docs/victory-axis#props)
 
 >Not applicable to PieChart
 
@@ -143,7 +143,7 @@ Example `{ name: "test" }`
 
 #####yAxis `object`
 
-This prop specifies a set of props to pass to the y axis. Valid props can be found here: [Axis](https://formidable.com/open-source//docs/-axis#props)
+This prop specifies a set of props to pass to the y axis. Valid props can be found here: [VictoryAxis](https://formidable.com/open-source/victory/docs/victory-axis#props)
 
 >Not applicable to PieChart
 
@@ -165,7 +165,7 @@ The interpolation prop determines how data points should be connected when plott
 
 #####series `arrayOf(object)`
 
-The series prop allows you to provide data series to your chart. Each object in the series array is representative of a subset of the properties found here: [Area](https://formidable.com/open-source//docs/-area)
+The series prop allows you to provide data series to your chart. Each object in the series array is representative of a subset of the properties found here: [VictoryArea](https://formidable.com/open-source/victory/docs/victory-area)
 
 The series child object shape is as follows:
 
@@ -250,7 +250,7 @@ The interpolation prop determines how data points should be connected when plott
 
 #####series `arrayOf(object)`
 
-The series prop allows you to provide data series to your chart. Each object in the series array is representative of a subset of the properties found here: [Line](https://formidable.com/open-source//docs/-line)
+The series prop allows you to provide data series to your chart. Each object in the series array is representative of a subset of the properties found here: [VictoryLine](https://formidable.com/open-source/victory/docs/victory-line)
 
 The series child object shape is as follows:
 
@@ -280,7 +280,7 @@ Example `(datum) => datum.y`
 
 #####series `arrayOf(object)`
 
-The series prop allows you to provide data series to your chart. Each object in the series array is representative of a subset of the properties found here: [Scatter](https://formidable.com/open-source//docs/-scatter)
+The series prop allows you to provide data series to your chart. Each object in the series array is representative of a subset of the properties found here: [VictoryScatter](https://formidable.com/open-source/victory/docs/victory-scatter)
 
 The series child object shape is as follows:
 
@@ -409,13 +409,13 @@ $ open http://localhost:3000
 $ npm test
 ```
 
-For more on the development environment, see [DEVELOPMENT](https://github.com/FormidableLabs/builder--component/blob/master/dev/DEVELOPMENT.md) in the project builder archetype.
+For more on the development environment, see [DEVELOPMENT](https://github.com/FormidableLabs/builder-victory-component/blob/master/dev/DEVELOPMENT.md) in the project builder archetype.
 
 ## Contributing
 
-Please review our [Code of Conduct](https://github.com/FormidableLabs/builder--component/blob/master/CONTRIBUTING.md#contributor-covenant-code-of-conduct) before contributing.
+Please review our [Code of Conduct](https://github.com/FormidableLabs/builder-victory-component/blob/master/CONTRIBUTING.md#contributor-covenant-code-of-conduct) before contributing.
 
-For a detailed contribution guide, please see [CONTRIBUTING](https://github.com/FormidableLabs/builder--component/blob/master/dev/CONTRIBUTING.md) in the project builder archetype.
+For a detailed contribution guide, please see [CONTRIBUTING](https://github.com/FormidableLabs/builder-victory-component/blob/master/dev/CONTRIBUTING.md) in the project builder archetype.
 
 ## _IMPORTANT_
 
