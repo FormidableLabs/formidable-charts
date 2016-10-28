@@ -6,13 +6,13 @@
 
 import React from "react";
 import { mount } from "enzyme";
-import { VictoryStandalone } from "src";
+import { Standalone } from "src";
 
-describe("components/victory-composition", () => {
+describe("components/formidable-charts", () => {
   describe("default component rendering", () => {
     it("renders an svg with the correct width and height", () => {
       const wrapper = mount(
-        <VictoryStandalone/>
+        <Standalone/>
       );
       const svg = wrapper.find("svg");
       expect(svg.prop("style").width).to.equal("100%");
@@ -21,7 +21,7 @@ describe("components/victory-composition", () => {
 
     it("renders an svg with the correct viewBox", () => {
       const wrapper = mount(
-        <VictoryStandalone/>
+        <Standalone/>
       );
       const svg = wrapper.find("svg");
       const viewBoxValue =
