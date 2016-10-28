@@ -32,7 +32,7 @@ window.mocha.setup({
 // code coverage in the bundle, whether tested or not.
 const srcReq = require.context("src", true, /\.js?$/);
 srcReq.keys().filter((d) => {
-  return d.indexOf('.ios.') === -1 && d.indexOf('.android.') === -1;  
+  return d.indexOf(".ios.") === -1 && d.indexOf(".android.") === -1; 
 }).map(srcReq);
 
 // Use webpack to infer and `require` tests automatically.
