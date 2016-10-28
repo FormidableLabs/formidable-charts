@@ -1,4 +1,4 @@
-<h1 align="center">victory-composed</h1>
+<h1 align="center">formidable-charts</h1>
 
 <h4 align="center">
   Ready-made composed Victory Components!
@@ -13,11 +13,11 @@
 - [Getting Started](#getting-started)
 - [API Documentation](#api-documentation)
   - [Common Props](#common-props)
-  - [VictoryAreaChart](#victoryareachart)
-  - [VictoryBarChart](#victorybarchart)
-  - [VictoryLineChart](#victorylinechart)
-  - [VictoryScatterChart](#victoryscatterchart)
-  - [VictoryPieChart](#victorypiechart)
+  - [AreaChart](#areachart)
+  - [BarChart](#barchart)
+  - [LineChart](#linechart)
+  - [ScatterChart](#scatterchart)
+  - [PieChart](#piechart)
 - [Themes](#themes)
 - [Development](#development)
 - [Contributing](#contributing)
@@ -27,32 +27,32 @@
 
 ## Getting Started
 
-`victory-composed` is a set of composed, pre-styled Victory components that can be used to display rich, interactive charts. Our theming system not only supports style based theming, but behavioral/compositional theming as well.
+`formidable-charts` is a set of composed, pre-styled Victory components that can be used to display rich, interactive charts. Our theming system not only supports style based theming, but behavioral/compositional theming as well.
 
-1. Add `victory-composed` to your project
+1. Add `formidable-charts` to your project
 
 	```sh
-	npm install victory-composed --save
+	npm install formidable-charts --save
 	```
 
-  For React Native, you'll need `victory-native` and `react-native-svg`:
+  For React Native, you'll need `-native` and `react-native-svg`:
 
   ```sh
-  npm install victory-native victory-composed react-native-svg --save
+  npm install -native formidable-charts react-native-svg --save
   react-native link react-native-svg
   ```
 
-2. Add your first `victory-composed` component:
+2. Add your first `formidable-charts` component:
 
 	```js
    import React, { Component } from 'react';
    import { render } from 'react-dom';
-   import { VictoryLineChart } from 'victory-composed';
+   import { LineChart } from 'formidable-charts';
 
    class MyLineChart extends Component {
      render() {
        return (
-         <VictoryLineChart />
+         <LineChart />
        );
      }
    }
@@ -65,14 +65,14 @@
 
 ### Common Props
 
-The following is a list of common props shared by each chart, with the exception of VictoryPieChart where noted:
+The following is a list of common props shared by each chart, with the exception of PieChart where noted:
 
 
 #####categories `oneOfType(shape({ x: arrayOf(string), y: arrayOf(string) }), arrayOf(string))`
 
 The categories prop specifies how categorical data for a chart should be ordered. This prop should be given as an array of string values, or an object with these arrays of values specified for x and y. If this prop is not set, categorical data will be plotted in the order it was given in the data array.
 
->Not applicable to VictoryPieChart
+>Not applicable to PieChart
 
 Examples: `["dogs", "cats", "mice"], { x: ["dogs","cats"], y: ["mice","birds"]}`
 
@@ -82,7 +82,7 @@ Examples: `["dogs", "cats", "mice"], { x: ["dogs","cats"], y: ["mice","birds"]}`
 
 The domain prop describes the range of values your chart will include. This prop can be given as a array of the minimum and maximum expected values for your chart, or as an object that specifies separate arrays for x and y. If this prop is not provided, a domain will be calculated from data, or other available information.
 
->Not applicable to VictoryPieChart
+>Not applicable to PieChart
 
 
 Examples: `[-1, 1], {x: [0, 100], y: [0, 1]}`
@@ -93,7 +93,7 @@ Examples: `[-1, 1], {x: [0, 100], y: [0, 1]}`
 
 The domainPadding prop specifies a number of pixels of padding to add to the beginning and end of a domain. This prop is useful for explicitly spacing ticks farther from the origin to prevent crowding. This prop should be given as an object with numbers specified for x and y.
 
->Not applicable to VictoryPieChart
+>Not applicable to PieChart
 
 Examples: `20, { x: 5, y: 10 }`
 
@@ -133,9 +133,9 @@ The width props specifies the width of the svg viewBox of the chart container. T
 
 #####xAxis `object`
 
-This prop specifies a set of props to pass to the x axis. Valid props can be found here: [VictoryAxis](https://formidable.com/open-source/victory/docs/victory-axis#props)
+This prop specifies a set of props to pass to the x axis. Valid props can be found here: [Axis](https://formidable.com/open-source//docs/-axis#props)
 
->Not applicable to VictoryPieChart
+>Not applicable to PieChart
 
 Example `{ name: "test" }`
 
@@ -143,15 +143,15 @@ Example `{ name: "test" }`
 
 #####yAxis `object`
 
-This prop specifies a set of props to pass to the y axis. Valid props can be found here: [VictoryAxis](https://formidable.com/open-source/victory/docs/victory-axis#props)
+This prop specifies a set of props to pass to the y axis. Valid props can be found here: [Axis](https://formidable.com/open-source//docs/-axis#props)
 
->Not applicable to VictoryPieChart
+>Not applicable to PieChart
 
 Example `{ scale: "time" }`
 
 ---
 
-### VictoryAreaChart
+### AreaChart
 
 --
 
@@ -165,7 +165,7 @@ The interpolation prop determines how data points should be connected when plott
 
 #####series `arrayOf(object)`
 
-The series prop allows you to provide data series to your chart. Each object in the series array is representative of a subset of the properties found here: [VictoryArea](https://formidable.com/open-source/victory/docs/victory-area)
+The series prop allows you to provide data series to your chart. Each object in the series array is representative of a subset of the properties found here: [Area](https://formidable.com/open-source//docs/-area)
 
 The series child object shape is as follows:
 
@@ -189,7 +189,7 @@ The stacked prop is a boolean value that determines whether to stack your area c
 
 ---
 
-### VictoryBarChart
+### BarChart
 
 --
 
@@ -209,13 +209,13 @@ Example `(datum) => datum.y`
 
 #####offset `number`
 
-The offset prop on VictoryGroup controls the spacing between each series of bars in a group.
+The offset prop on Group controls the spacing between each series of bars in a group.
 
 --
 
 #####series `arrayOf(object)`
 
-The series prop allows you to provide data series to your chart. Each object in the series array is representative of a subset of the properties found here: [VictoryBar](https://formidable.com/open-source/victory/docs/victory-bar)
+The series prop allows you to provide data series to your chart. Each object in the series array is representative of a subset of the properties found here: [Bar](https://formidable.com/open-source//docs/-bar)
 
 The series child object shape is as follows:
 
@@ -238,7 +238,7 @@ The stacked prop is a boolean value that determines whether to stack your bar ch
 
 ---
 
-### VictoryLineChart
+### LineChart
 
 #####interpolation `string`
 
@@ -250,7 +250,7 @@ The interpolation prop determines how data points should be connected when plott
 
 #####series `arrayOf(object)`
 
-The series prop allows you to provide data series to your chart. Each object in the series array is representative of a subset of the properties found here: [VictoryLine](https://formidable.com/open-source/victory/docs/victory-line)
+The series prop allows you to provide data series to your chart. Each object in the series array is representative of a subset of the properties found here: [Line](https://formidable.com/open-source//docs/-line)
 
 The series child object shape is as follows:
 
@@ -268,7 +268,7 @@ Example `[{ data: [{ x: 0, y: 1 }] ] }, { data: [ [2,3], [4 ,5] ] }]`
 
 ---
 
-### VictoryScatterChart
+### ScatterChart
 
 #####labels `func`
 
@@ -280,7 +280,7 @@ Example `(datum) => datum.y`
 
 #####series `arrayOf(object)`
 
-The series prop allows you to provide data series to your chart. Each object in the series array is representative of a subset of the properties found here: [VictoryScatter](https://formidable.com/open-source/victory/docs/victory-scatter)
+The series prop allows you to provide data series to your chart. Each object in the series array is representative of a subset of the properties found here: [Scatter](https://formidable.com/open-source//docs/-scatter)
 
 The series child object shape is as follows:
 
@@ -319,11 +319,11 @@ Example `"circle"`
 
 ---
 
-### VictoryPieChart
+### PieChart
 
 #####cornerRadius `number`
 
-Set the cornerRadius for every dataComponent (Slice by default) within VictoryPie
+Set the cornerRadius for every dataComponent (Slice by default) within Pie
 
 ---
 
@@ -362,15 +362,15 @@ The overall start angle of the pie in degrees. This prop is used in conjunction 
 
 ## Themes
 
-`victory-composed` has a set of beautiful preset themes ready to go. We default to the `simple` theme by default, but if you want to try out the whole gang, here is how:
+`formidable-charts` has a set of beautiful preset themes ready to go. We default to the `simple` theme by default, but if you want to try out the whole gang, here is how:
 
 ```js
-import { VictoryLineChart, Themes } from "victory-composed";
+import { LineChart, Themes } from "formidable-charts";
 
 class MyChart extends Component {
   render() {
     return (
-      <VictoryLineChart theme={Themes.dark} />
+      <LineChart theme={Themes.dark} />
     )
   }
 }
@@ -409,13 +409,13 @@ $ open http://localhost:3000
 $ npm test
 ```
 
-For more on the development environment, see [DEVELOPMENT](https://github.com/FormidableLabs/builder-victory-component/blob/master/dev/DEVELOPMENT.md) in the project builder archetype.
+For more on the development environment, see [DEVELOPMENT](https://github.com/FormidableLabs/builder--component/blob/master/dev/DEVELOPMENT.md) in the project builder archetype.
 
 ## Contributing
 
-Please review our [Code of Conduct](https://github.com/FormidableLabs/builder-victory-component/blob/master/CONTRIBUTING.md#contributor-covenant-code-of-conduct) before contributing.
+Please review our [Code of Conduct](https://github.com/FormidableLabs/builder--component/blob/master/CONTRIBUTING.md#contributor-covenant-code-of-conduct) before contributing.
 
-For a detailed contribution guide, please see [CONTRIBUTING](https://github.com/FormidableLabs/builder-victory-component/blob/master/dev/CONTRIBUTING.md) in the project builder archetype.
+For a detailed contribution guide, please see [CONTRIBUTING](https://github.com/FormidableLabs/builder--component/blob/master/dev/CONTRIBUTING.md) in the project builder archetype.
 
 ## _IMPORTANT_
 
