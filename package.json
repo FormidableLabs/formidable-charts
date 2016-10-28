@@ -1,19 +1,19 @@
 {
-  "name": "victory-composed",
+  "name": "formidable-charts",
   "version": "0.0.1",
   "description": "Top level composed component for Victory",
   "main": "lib/index.js",
   "react-native": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/formidablelabs/victory-composed.git"
+    "url": "https://github.com/formidablelabs/formidable-charts.git"
   },
   "author": "Ken Wheeler",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/formidablelabs/victory-composed/issues"
+    "url": "https://github.com/formidablelabs/formidable-charts/issues"
   },
-  "homepage": "https://github.com/formidablelabs/victory-composed",
+  "homepage": "https://github.com/formidablelabs/formidable-charts",
   "engineStrict": true,
   "engines": {
     "npm": ">=3.0.0"

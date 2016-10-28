@@ -2,12 +2,12 @@
 import React from "react";
 
 import {
-  VictoryStandalone,
-  VictoryAreaChart,
-  VictoryBarChart,
-  VictoryLineChart,
-  VictoryScatterChart,
-  VictoryPieChart,
+  Standalone,
+  AreaChart,
+  BarChart,
+  LineChart,
+  ScatterChart,
+  PieChart,
   Themes
 } from "../../src";
 
@@ -19,8 +19,8 @@ const types = ["line", "area", "scatter"];
 
 const ComponentDemos = {
   composedStandalone: (props) => (
-    <VictoryStandalone
-      title="VictoryStandalone"
+    <Standalone
+      title="Standalone"
       subtitle="Composed Demo"
       theme={Themes[props.theme]}
       series={props.data.map(data => {
@@ -33,39 +33,39 @@ const ComponentDemos = {
     />
   ),
   lineChart: (props) => (
-    <VictoryLineChart
-      title="VictoryLineChart"
+    <LineChart
+      title="LineChart"
       theme={Themes[props.theme]}
       series={props.data}
     />
   ),
   areaChart: (props) => (
-    <VictoryAreaChart
+    <AreaChart
       interpolation="natural"
       stacked
-      title="VictoryAreaChart"
+      title="AreaChart"
       theme={Themes[props.theme]}
       series={props.data}
     />
   ),
   barChart: (props) => (
-    <VictoryBarChart
-      title="VictoryBarChart"
+    <BarChart
+      title="BarChart"
       theme={Themes[props.theme]}
       series={props.data}
     />
   ),
   scatterChart: (props) => (
-    <VictoryScatterChart
-      title="VictoryScatterChart"
+    <ScatterChart
+      title="ScatterChart"
       theme={Themes[props.theme]}
       series={props.data}
       symbol="star"
     />
   ),
   pieChart: (props) => (
-    <VictoryPieChart
-      title="VictoryPieChart"
+    <PieChart
+      title="PieChart"
       innerRadius={100}
       theme={Themes[props.theme]}
       data={props.data[0].data}
@@ -146,12 +146,12 @@ export default class Wrapper extends React.Component {
           }}
           onChange={this.handleComponentChange}
         >
-          <option value="areaChart" defaultValue>VictoryAreaChart</option>
-          <option value="barChart">VictoryBarChart</option>
-          <option value="lineChart">VictoryLineChart</option>
-          <option value="pieChart">VictoryPieChart</option>
-          <option value="scatterChart">VictoryScatterChart</option>
-          <option value="composedStandalone">VictoryStandalone</option>
+          <option value="areaChart" defaultValue>AreaChart</option>
+          <option value="barChart">BarChart</option>
+          <option value="lineChart">LineChart</option>
+          <option value="pieChart">PieChart</option>
+          <option value="scatterChart">ScatterChart</option>
+          <option value="composedStandalone">Standalone</option>
         </select>
         </label>
         <button type="button" onClick={this.handleNewData}>Generate random data</button>
