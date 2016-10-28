@@ -30,11 +30,13 @@ window.mocha.setup({
 // --------------------------------------------------------------------------
 // Use webpack to include all app code _except_ the entry point so we can get
 // code coverage in the bundle, whether tested or not.
-const srcReq = require.context("src", true, /\.jsx?$/);
-srcReq.keys().map(srcReq);
+const srcReq = require.context("src", true, /\.js?$/);
+srcReq.keys().filter((d) => {
+  return d.indexOf(".ios.") === -1 && d.indexOf(".android.") === -1;
+}).map(srcReq);
 
 // Use webpack to infer and `require` tests automatically.
-const testsReq = require.context(".", true, /\.spec.jsx?$/);
+const testsReq = require.context(".", true, /\.spec.js?$/);
 testsReq.keys().map(testsReq);
 
 // Only start mocha in browser.
