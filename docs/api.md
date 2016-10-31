@@ -2,8 +2,7 @@
 
 ## Common Props
 
-The following is a list of common props shared by each chart, with the exception of PieChart where noted:
-
+The following is a list of common props shared by each chart, with the exception of PieChart where noted.
 
 ### categories
 
@@ -46,7 +45,7 @@ Examples: `20, { x: 5, y: 10 }`
 
 `number`
 
-The height props specifies the height of the svg viewBox of the chart container. This value should be given as a number of pixels.
+The height prop specifies the height of the svg viewBox of the chart container. This value should be given as a number of pixels.
 
 ---
 
@@ -62,7 +61,7 @@ The subtitle for your chart. This value should be a string.
 
 `object`
 
-This prop specifies which theme to use for your chart. See the themes section below for available themes and how to add them.
+This prop specifies which theme to use for your chart. See the themes section of the documentation for available themes and how to add them.
 
 Example `Themes.simple`
 
@@ -88,7 +87,7 @@ The width props specifies the width of the svg viewBox of the chart container. T
 
 `object`
 
-This prop specifies a set of props to pass to the x axis. Valid props can be found here: [VictoryAxis](https://formidable.com/open-source/victory/docs/victory-axis#props)
+This prop specifies a set of props to pass to the x axis. Valid props can be found in the documentation for the [VictoryAxis component](https://formidable.com/open-source/victory/docs/victory-axis#props) from the Victory library.
 
 >Not applicable to PieChart
 
@@ -100,7 +99,7 @@ Example `{ name: "test" }`
 
 `object`
 
-This prop specifies a set of props to pass to the y axis. Valid props can be found here: [VictoryAxis](https://formidable.com/open-source/victory/docs/victory-axis#props)
+This prop specifies a set of props to pass to the y axis. Valid props can be found in the documentation for the [VictoryAxis component](https://formidable.com/open-source/victory/docs/victory-axis#props) from the Victory library.
 
 >Not applicable to PieChart
 
@@ -126,7 +125,7 @@ The interpolation prop determines how data points should be connected when plott
 
 `arrayOf(object)`
 
-The series prop allows you to provide data series to your chart. Each object in the series array is representative of a subset of the properties found here: [VictoryArea](https://formidable.com/open-source/victory/docs/victory-area)
+The series prop allows you to provide data series to your chart. Each object in the series array is representative of a subset of the properties found in the documentation or the [VictoryArea component](https://formidable.com/open-source/victory/docs/victory-area) from the Victory library.
 
 The series child object shape is as follows:
 
@@ -178,7 +177,7 @@ Example `(datum) => datum.y`
 
 `number`
 
-The offset prop on Group controls the spacing between each series of bars in a group.
+The offset prop controls the spacing between each series of bars in a group.
 
 ---
 
@@ -186,7 +185,7 @@ The offset prop on Group controls the spacing between each series of bars in a g
 
 `arrayOf(object)`
 
-The series prop allows you to provide data series to your chart. Each object in the series array is representative of a subset of the properties found here: [Bar](https://formidable.com/open-source//docs/-bar)
+The series prop allows you to provide data series to your chart. Each object in the series array is representative of a subset of the properties found in the documentation for the [VictoryBar component](https://formidable.com/open-source/victory/docs/victory-bar) from the Victory library.
 
 The series child object shape is as follows:
 
@@ -227,7 +226,7 @@ The interpolation prop determines how data points should be connected when plott
 
 `arrayOf(object)`
 
-The series prop allows you to provide data series to your chart. Each object in the series array is representative of a subset of the properties found here: [VictoryLine](https://formidable.com/open-source/victory/docs/victory-line)
+The series prop allows you to provide data series to your chart. Each object in the series array is representative of a subset of the properties found in the documentation for the [VictoryLine component](https://formidable.com/open-source/victory/docs/victory-line) from the Victory library.
 
 The series child object shape is as follows:
 
@@ -261,7 +260,7 @@ Example `(datum) => datum.y`
 
 `arrayOf(object)`
 
-The series prop allows you to provide data series to your chart. Each object in the series array is representative of a subset of the properties found here: [VictoryScatter](https://formidable.com/open-source/victory/docs/victory-scatter)
+The series prop allows you to provide data series to your chart. Each object in the series array is representative of a subset of the properties found in the documentation for the [VictoryScatter component](https://formidable.com/open-source/victory/docs/victory-scatter) from the Victory library.
 
 The series child object shape is as follows:
 
@@ -310,7 +309,7 @@ Example `"circle"`
 
 `number`
 
-Set the cornerRadius for every dataComponent (Slice by default) within Pie
+Set the cornerRadius for every dataComponent (`Slice` by default) within Pie.
 
 ----
 
