@@ -1,6 +1,6 @@
 # Getting Started
 
-`formidable-charts` is a set of composed, pre-styled Victory components that can be used to display rich, interactive charts. Our theming system not only supports style based theming, but behavioral/compositional theming as well.
+`formidable-charts` is a set of composed, pre-styled Victory components that can be used to display rich, interactive charts. Our theming system not only supports style based theming, but behavioral and compositional theming as well.
 
 1. Add `formidable-charts` to your project
 
@@ -90,7 +90,3 @@ For more on the development environment, see [DEVELOPMENT](https://github.com/Fo
 Please review our [Code of Conduct](https://github.com/FormidableLabs/builder-victory-component/blob/master/CONTRIBUTING.md#contributor-covenant-code-of-conduct) before contributing.
 
 For a detailed contribution guide, please see [CONTRIBUTING](https://github.com/FormidableLabs/builder-victory-component/blob/master/dev/CONTRIBUTING.md) in the project builder archetype.
-
-# _IMPORTANT_
-
-This project is in a pre-release state. We're hard at work fixing bugs and improving the API. Be prepared for breaking changes!
