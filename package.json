@@ -1,6 +1,6 @@
 {
   "name": "formidable-charts",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Top level composed component for Victory",
   "main": "lib/index.js",
   "react-native": "src/index.js",
