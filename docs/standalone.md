@@ -4,7 +4,7 @@
 
 You can start using it by including the lib from:
 
-
+`https://unpkg.com/formidable-charts/dist/formidable-charts-standalone.js`
 
 Next, you can create a new chart instance:
 
