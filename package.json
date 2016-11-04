@@ -29,13 +29,14 @@
     "docs-build-static": "echo 'Static docs generation for victory-chart is not supported.'"
   },
   "dependencies": {
-    "builder-victory-component": "^2.5.0",
+    "builder": "^3.1.0",
+    "builder-victory-component": "^3.1.0",
     "victory-chart": "^12.0.1",
     "victory-core": "^8.0.1",
     "victory-pie": "^6.0.0"
   },
   "devDependencies": {
-    "builder-victory-component-dev": "^2.5.0",
+    "builder-victory-component-dev": "^3.1.0",
     "chai": "^3.5.0",
     "ecology": "^1.6.1",
     "enzyme": "^2.4.1",
