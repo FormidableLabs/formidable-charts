@@ -14,22 +14,22 @@ class MyChart extends Component {
 }
 ```
 
-Right now we have four themes that you can choose from:
+Right now we have 4 themes you can choose from:
 
-`bright` - A bright, fun theme. The default for FormidableChart components.
+`bright` - A bright, fun theme.
 
-![bright](http://i.imgur.com/ZXKDgEe.png)
+![bright](http://i.imgur.com/UqNQyls.png)
 
 `simple` - A simple, yet elegant theme.
 
-![simple](http://i.imgur.com/aAfwrWj.png)
+![simple](http://i.imgur.com/LcoDg8J.png)
 
-`dark` - A dark theme for your charts.
+`dark` - Uh oh who turned the lights out. A dark theme for your charts.
 
-![dark](http://i.imgur.com/qJhlp1f.png)
+![dark](http://i.imgur.com/5I11B9q.png)
 
 `danceparty` - Use this one carefully. You might have too much fun.
 
-![danceparty](http://i.imgur.com/ULpP5LV.png)
+![danceparty](http://i.imgur.com/8nwFBGu.png)
 
 Keep your eyes peeled, there are more themes on the way!

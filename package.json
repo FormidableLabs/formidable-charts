@@ -1,6 +1,6 @@
 {
   "name": "formidable-charts",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Top level composed component for Victory",
   "main": "lib/index.js",
   "react-native": "src/index.js",
@@ -22,24 +22,27 @@
     "postinstall": "cd lib || builder run npm:postinstall",
     "preversion": "builder run npm:preversion",
     "start": "builder run hot",
+    "standalone": "webpack --config config/webpack.config.standalone.js",
     "test": "builder run check",
     "benchmark": "builder run check-perf",
     "version": "builder run npm:version && git add dist && git commit -m \"Commit 'dist/' for publishing\"",
     "docs-build-static": "echo 'Static docs generation for victory-chart is not supported.'"
   },
   "dependencies": {
-    "builder-victory-component": "^2.5.0",
+    "builder": "^3.1.0",
+    "builder-victory-component": "^3.1.0",
     "victory-chart": "^12.0.1",
     "victory-core": "^8.0.1",
     "victory-pie": "^6.0.0"
   },
   "devDependencies": {
-    "builder-victory-component-dev": "^2.5.0",
+    "builder-victory-component-dev": "^3.1.0",
     "chai": "^3.5.0",
     "ecology": "^1.6.1",
     "enzyme": "^2.4.1",
     "file-loader": "^0.9.0",
     "formidable-landers": "^5.1.1",
+    "lodash-webpack-plugin": "^0.10.3",
     "mocha": "^3.1.0",
     "radium": "^0.18.1",
     "react": "^15.3.2",

@@ -12,8 +12,8 @@ import {
 
 import Themes from "../../themes";
 
-export default class VictoryStandalone extends React.Component {
-  static displayName = "VictoryStandalone";
+export default class Standalone extends React.Component {
+  static displayName = "Standalone";
 
   static propTypes = {
     domain: PropTypes.oneOfType([

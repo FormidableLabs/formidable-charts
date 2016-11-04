@@ -7,8 +7,8 @@ import {
 
 import Themes from "../../themes";
 
-export default class VictoryLineChart extends React.Component {
-  static displayName = "VictoryLineChart";
+export default class LineChart extends React.Component {
+  static displayName = "LineChart";
 
   static propTypes = {
     categories: PropTypes.oneOfType([
