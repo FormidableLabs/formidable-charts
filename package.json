@@ -51,5 +51,13 @@
     "react-router": "^2.8.1",
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0"
+  },
+  "publishr": {
+    "dependencies": [
+      "^builder"
+    ],
+    "files": {
+      ".npmignore": ".npmignore.publishr"
+    }
   }
 }
