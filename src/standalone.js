@@ -1,6 +1,6 @@
 import React from "react";
-import ReactDOM from 'react-dom';
-import { Standalone, Themes } from './index';
+import ReactDOM from "react-dom";
+import { Standalone, Themes } from "./index";
 
 module.exports = class Victory {
   constructor(dom, options) {
@@ -17,4 +17,5 @@ module.exports = class Victory {
     this.props = {...this.props, ...data};
     ReactDOM.render(<Standalone {...this.props} />, this.dom);
   }
-}
+};
+

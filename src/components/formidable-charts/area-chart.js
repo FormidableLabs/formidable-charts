@@ -11,8 +11,8 @@ import {
 
 import Themes from "../../themes";
 
-export default class VictoryAreaChart extends React.Component {
-  static displayName = "VictoryAreaChart";
+export default class AreaChart extends React.Component {
+  static displayName = "AreaChart";
 
   static propTypes = {
     categories: PropTypes.oneOfType([

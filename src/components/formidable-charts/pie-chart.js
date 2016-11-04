@@ -7,8 +7,8 @@ import {
 
 import Themes from "../../themes";
 
-export default class VictoryPieChart extends React.Component {
-  static displayName = "VictoryPieChart";
+export default class PieChart extends React.Component {
+  static displayName = "PieChart";
 
   static propTypes = {
     cornerRadius: PropTypes.number,
