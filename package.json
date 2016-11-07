@@ -19,13 +19,14 @@
     "npm": ">=3.0.0"
   },
   "scripts": {
-    "postinstall": "cd lib || builder run npm:postinstall",
     "preversion": "builder run npm:preversion",
+    "postversion": "builder run npm:postversion",
+    "postpublish": "builder run npm:postpublish",
     "start": "builder run hot",
     "standalone": "webpack --config config/webpack.config.standalone.js",
     "test": "builder run check",
     "benchmark": "builder run check-perf",
-    "version": "builder run npm:version && git add dist && git commit -m \"Commit 'dist/' for publishing\"",
+    "version": "builder run npm:version",
     "docs-build-static": "echo 'Static docs generation for victory-chart is not supported.'"
   },
   "dependencies": {
