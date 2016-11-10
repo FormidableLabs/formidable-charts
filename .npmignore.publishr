@@ -2,6 +2,7 @@
 !/dist
 dist/*.map
 !/lib
+!/docs
 !/src
 !LICENSE.txt
 !CHANGELOG.md
