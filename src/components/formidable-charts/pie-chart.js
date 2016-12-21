@@ -61,15 +61,15 @@ export default class PieChart extends React.Component {
   };
 
   getRenderableProps() {
-    const { height, width, title, subtitle, theme, ...renderableProps } = this.props;
+    const { title, subtitle, theme, ...renderableProps } = this.props;
     // Add data if available
     renderableProps.key = "pie";
-    renderableProps.standalone = true;
+    renderableProps.standalone = false;
     renderableProps.padding = {
-      top: this.props.subtitle || this.props.title ? 100 : 50,
-      left: 75,
+      top: this.props.subtitle || this.props.title ? 75 : 25,
+      left: 50,
       bottom: 50,
-      right: 75
+      right: 50
     };
 
     // Get color

@@ -33,9 +33,9 @@
   "dependencies": {
     "builder": "^3.1.0",
     "builder-victory-component": "^3.1.0",
-    "victory-chart": "^12.0.1",
-    "victory-core": "^8.0.1",
-    "victory-pie": "^6.0.0"
+    "victory-chart": "^14.0.4",
+    "victory-core": "^10.0.3",
+    "victory-pie": "^8.0.0"
   },
   "devDependencies": {
     "builder-victory-component-dev": "^3.1.0",
